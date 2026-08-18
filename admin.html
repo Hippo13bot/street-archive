@@ -741,7 +741,7 @@ async function loadPendingWorks() {
     const response =
       await fetch(
 
-        `${SUPABASE_URL}/rest/v1/works?select=*&status=eq.pending&order=created_at.desc`,
+        `${SUPABASE_URL}/rest/v1/works?Id=eq.${id}`
 
         {
 
