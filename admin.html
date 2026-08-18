@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VALEN WORLD — ADMIN</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  background: #f4f4f0;
+  color: #111;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  padding: 16px;
+
+  border-bottom: 2px solid #111;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.logo {
+  display: inline-block;
+
+  padding: 5px 7px 4px;
+
+  border: 2px solid #111;
+
+  font-size: 22px;
+  font-weight: 900;
+
+  letter-spacing: -1.5px;
+}
+
+.admin-label {
+  margin-top: 5px;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 1.5px;
+}
+
+.logout {
+  padding: 8px 10px;
+
+  border: 1px solid #111;
+  border-radius: 0;
+
+  background: transparent;
+
+  font-size: 9px;
+  font-weight: 900;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+  width: 100%;
+  max-width: 900px;
+
+  margin: auto;
+
+  padding: 18px 16px 40px;
+}
+
+.top {
+  display: flex;
+
+  align-items: end;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+}
+
+h1 {
+  margin: 0;
+
+  font-size: 28px;
+  line-height: 1;
+
+  letter-spacing: -1.5px;
+}
+
+.counter {
+  padding: 6px 8px;
+
+  border: 1px dashed #111;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+#loginScreen {
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+
+  padding: 20px;
+
+  border: 2px solid #111;
+}
+
+.login-box h1 {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+
+  margin: 13px 0 5px;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+input {
+  width: 100%;
+
+  padding: 11px;
+
+  border: 1px solid #111;
+  border-radius: 0;
+
+  background: transparent;
+}
+
+.login-button {
+  width: 100%;
+
+  margin-top: 15px;
+
+  padding: 13px;
+
+  border: 2px solid #111;
+
+  background: #111;
+  color: #f4f4f0;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.error {
+  margin-top: 10px;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+/* =========================
+   WORKS
+========================= */
+
+#works {
+  display: grid;
+
+  gap: 15px;
+}
+
+.work {
+  border: 2px solid #111;
+
+  background: #f4f4f0;
+}
+
+.photo {
+  width: 100%;
+
+  max-height: 500px;
+
+  object-fit: cover;
+
+  display: block;
+
+  border-bottom: 1px solid #111;
+}
+
+.info {
+  padding: 13px;
+}
+
+.category {
+  display: inline-block;
+
+  padding: 5px 7px;
+
+  border: 1px dashed #111;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.date {
+  margin-top: 8px;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.location {
+  margin-top: 5px;
+
+  font-size: 9px;
+
+  opacity: .7;
+}
+
+.actions {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 7px;
+
+  margin-top: 15px;
+}
+
+.approve,
+.reject {
+  padding: 12px;
+
+  border-radius: 0;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: .8px;
+}
+
+.approve {
+  border: 2px solid #111;
+
+  background: #111;
+  color: #f4f4f0;
+}
+
+.reject {
+  border: 1px solid #111;
+
+  background: transparent;
+  color: #111;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty {
+  padding: 30px 15px;
+
+  border: 1px dashed #111;
+
+  text-align: center;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+  margin-top: 10px;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 700px) {
+
+  #works {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photo {
+    height: 350px;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section id="loginScreen">
+
+  <div class="login-box">
+
+    <div class="logo">
+      VALEN WORLD
+    </div>
+
+    <div class="admin-label">
+      ADMINISTRATION
+    </div>
+
+    <h1>
+      CONNEXION
+    </h1>
+
+    <form id="loginForm">
+
+      <label>
+        EMAIL
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        required
+        autocomplete="email"
+      >
+
+      <label>
+        MOT DE PASSE
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        required
+        autocomplete="current-password"
+      >
+
+      <button
+        class="login-button"
+        type="submit"
+      >
+        SE CONNECTER
+      </button>
+
+      <div
+        class="error"
+        id="loginError"
+      ></div>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     ADMIN
+========================= -->
+
+<div
+  id="adminApp"
+  style="display:none;"
+>
+
+  <header>
+
+    <div>
+
+      <div class="logo">
+        VALEN WORLD
+      </div>
+
+      <div class="admin-label">
+        ADMINISTRATION
+      </div>
+
+    </div>
+
+    <button
+      class="logout"
+      id="logout"
+    >
+      DÉCONNEXION
+    </button>
+
+  </header>
+
+
+  <main>
+
+    <div class="top">
+
+      <h1>
+        À VALIDER
+      </h1>
+
+      <div class="counter">
+        <span id="counter">
+          0
+        </span>
+        EN ATTENTE
+      </div>
+
+    </div>
+
+
+    <div id="works">
+
+    </div>
+
+  </main>
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+  "https://klvcugwhjaxmpvskplqd.supabase.co";
+
+const SUPABASE_KEY =
+  "TON-MÊME-ANON-PUBLISHABLE-KEY";
+
+
+/*
+   IMPORTANT :
+
+   Mets ici la même clé publique
+   que celle utilisée dans index.html.
+
+   Ne mets JAMAIS une service_role key.
+*/
+
+
+/* =========================
+   AUTH
+========================= */
+
+let currentUser = null;
+
+
+/* =========================
+   SUPABASE REQUEST
+========================= */
+
+async function supabaseRequest(
+  url,
+  options = {}
+) {
+
+  const response =
+    await fetch(
+      `${SUPABASE_URL}${url}`,
+      {
+
+        ...options,
+
+        headers: {
+
+          "apikey":
+            SUPABASE_KEY,
+
+          ...options.headers
+
+        }
+
+      }
+    );
+
+
+  return response;
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document
+  .getElementById(
+    "loginForm"
+  )
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const email =
+        document
+          .getElementById(
+            "email"
+          )
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById(
+            "password"
+          )
+          .value;
+
+
+      const error =
+        document
+          .getElementById(
+            "loginError"
+          );
+
+
+      error.textContent =
+        "CONNEXION...";
+
+
+      try {
+
+        const response =
+          await supabaseRequest(
+            "/auth/v1/token?grant_type=password",
+            {
+
+              method:
+                "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json"
+
+              },
+
+              body:
+                JSON.stringify({
+
+                  email:
+                    email,
+
+                  password:
+                    password
+
+                })
+
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          !response.ok
+        ) {
+
+          throw new Error(
+            data.error_description ||
+            data.msg ||
+            "Connexion impossible."
+          );
+
+        }
+
+
+        /*
+          On garde la session dans le navigateur.
+        */
+
+        localStorage.setItem(
+          "valen_access_token",
+          data.access_token
+        );
+
+        localStorage.setItem(
+          "valen_refresh_token",
+          data.refresh_token
+        );
+
+
+        currentUser =
+          data.user;
+
+
+        showAdmin();
+
+
+      } catch (
+        err
+      ) {
+
+        error.textContent =
+          err.message;
+
+      }
+
+    }
+  );
+
+
+/* =========================
+   SHOW ADMIN
+========================= */
+
+function showAdmin() {
+
+  document
+    .getElementById(
+      "loginScreen"
+    )
+    .style.display =
+    "none";
+
+
+  document
+    .getElementById(
+      "adminApp"
+    )
+    .style.display =
+    "block";
+
+
+  loadPendingWorks();
+
+}
+
+
+/* =========================
+   GET TOKEN
+========================= */
+
+function getToken() {
+
+  return localStorage.getItem(
+    "valen_access_token"
+  );
+
+}
+
+
+/* =========================
+   LOAD PENDING
+========================= */
+
+async function loadPendingWorks() {
+
+  const container =
+    document.getElementById(
+      "works"
+    );
+
+
+  container.innerHTML =
+    `
+      <div class="empty">
+        CHARGEMENT...
+      </div>
+    `;
+
+
+  try {
+
+    const token =
+      getToken();
+
+
+    const response =
+      await fetch(
+
+        `${SUPABASE_URL}/rest/v1/works?select=*&status=eq.pending&order=created_at.desc`,
+
+        {
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              `Bearer ${token}`
+
+          }
+
+        }
+
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok
+    ) {
+
+      throw new Error(
+        data.message ||
+        "Impossible de charger les œuvres."
+      );
+
+    }
+
+
+    document
+      .getElementById(
+        "counter"
+      )
+      .textContent =
+      data.length;
+
+
+    if (
+      data.length === 0
+    ) {
+
+      container.innerHTML =
+        `
+          <div class="empty">
+            AUCUNE ŒUVRE EN ATTENTE
+          </div>
+        `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      "";
+
+
+    data.forEach(
+      work => {
+
+        container.appendChild(
+          createWorkCard(
+            work
+          )
+        );
+
+      }
+    );
+
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    container.innerHTML =
+      `
+        <div class="empty">
+          ERREUR DE CHARGEMENT
+        </div>
+      `;
+
+  }
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+function createWorkCard(
+  work
+) {
+
+  const article =
+    document.createElement(
+      "article"
+    );
+
+
+  article.className =
+    "work";
+
+
+  article.innerHTML = `
+
+    ${
+      work.photo_url
+        ? `
+          <img
+            class="photo"
+            src="${escapeHTML(
+              work.photo_url
+            )}"
+            alt="Œuvre"
+          >
+        `
+        : ""
+    }
+
+    <div class="info">
+
+      <div class="category">
+
+        ${escapeHTML(
+          (
+            work.category ||
+            ""
+          ).toUpperCase()
+        )}
+
+      </div>
+
+      <div class="date">
+
+        DATE :
+        ${escapeHTML(
+          work.date ||
+          "—"
+        )}
+
+      </div>
+
+      <div class="location">
+
+        ${Number(
+          work.latitude
+        ).toFixed(6)}
+        ,
+        ${Number(
+          work.longitude
+        ).toFixed(6)}
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="approve"
+          data-id="${work.id}"
+        >
+          ✓ APPROUVER
+        </button>
+
+        <button
+          class="reject"
+          data-id="${work.id}"
+        >
+          ✕ REFUSER
+        </button>
+
+      </div>
+
+      <div
+        class="status"
+        id="status-${work.id}"
+      ></div>
+
+    </div>
+  `;
+
+
+  article
+    .querySelector(
+      ".approve"
+    )
+    .addEventListener(
+      "click",
+      () =>
+        moderateWork(
+          work.id,
+          "approved"
+        )
+    );
+
+
+  article
+    .querySelector(
+      ".reject"
+    )
+    .addEventListener(
+      "click",
+      () =>
+        moderateWork(
+          work.id,
+          "rejected"
+        )
+    );
+
+
+  return article;
+
+}
+
+
+/* =========================
+   MODERATION
+========================= */
+
+async function moderateWork(
+  id,
+  status
+) {
+
+  const statusElement =
+    document.getElementById(
+      `status-${id}`
+    );
+
+
+  statusElement.textContent =
+    "ENREGISTREMENT...";
+
+
+  try {
+
+    const token =
+      getToken();
+
+
+    /*
+      Récupération de l'utilisateur
+      actuellement connecté.
+    */
+
+    const userResponse =
+      await fetch(
+
+        `${SUPABASE_URL}/auth/v1/user`,
+
+        {
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              `Bearer ${token}`
+
+          }
+
+        }
+
+      );
+
+
+    const user =
+      await userResponse.json();
+
+
+    if (
+      !user.id
+    ) {
+
+      throw new Error(
+        "Session expirée."
+      );
+
+    }
+
+
+    const response =
+      await fetch(
+
+        `${SUPABASE_URL}/rest/v1/works?id=eq.${id}`,
+
+        {
+
+          method:
+            "PATCH",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              `Bearer ${token}`,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              status:
+                status,
+
+              reviewed_at:
+                new Date().toISOString(),
+
+              reviewed_by:
+                user.id
+
+            })
+
+        }
+
+      );
+
+
+    if (
+      !response.ok
+    ) {
+
+      const error =
+        await response.text();
+
+
+      throw new Error(
+        error ||
+        "Impossible de modifier l'œuvre."
+      );
+
+    }
+
+
+    /*
+      Recharge la liste.
+    */
+
+    await loadPendingWorks();
+
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      error
+    );
+
+
+    statusElement.textContent =
+      "ERREUR : " +
+      error.message;
+
+  }
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+  .getElementById(
+    "logout"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      localStorage.removeItem(
+        "valen_access_token"
+      );
+
+      localStorage.removeItem(
+        "valen_refresh_token"
+      );
+
+      location.reload();
+
+    }
+  );
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(
+  value
+) {
+
+  return String(
+    value
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================
+   EXISTING SESSION
+========================= */
+
+if (
+  getToken()
+) {
+
+  showAdmin();
+
+}
+
+</script>
+
+</body>
+</html>
