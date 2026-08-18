@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STREET ARCHIVE</title>
+<title>VALEN WORLD</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
@@ -12,69 +12,83 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
+  width: 100%;
   height: 100%;
+  overflow: hidden;
+  background: #f4f4f0;
+  color: #111;
   font-family: Arial, Helvetica, sans-serif;
-  background: #111;
-  color: #fff;
 }
 
 #app {
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: relative;
-  overflow: hidden;
 }
+
+/* =========================
+   MAP
+========================= */
 
 #map {
   position: absolute;
   inset: 0;
   z-index: 1;
-  filter: grayscale(1) contrast(1.05);
+  filter: grayscale(1) contrast(0.9);
 }
+
+/* =========================
+   HEADER
+========================= */
 
 .header {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 16px;
+  left: 16px;
   z-index: 1000;
-  padding: 18px;
   pointer-events: none;
 }
 
 .logo {
   display: inline-block;
-  background: #fff;
-  color: #000;
-  padding: 7px 10px 5px;
+  padding: 4px 7px 3px;
+  border: 2px solid #111;
+  background: #f4f4f0;
   font-size: 25px;
-  font-weight: 900;
-  letter-spacing: -1.5px;
   line-height: 1;
-  box-shadow: 4px 4px 0 #000;
+  font-weight: 900;
+  letter-spacing: -1.8px;
 }
 
 .subtitle {
-  margin-top: 8px;
   display: inline-block;
-  background: #000;
-  color: #fff;
-  padding: 5px 8px;
-  font-size: 10px;
+  margin-top: 5px;
+  padding: 4px 6px;
+  border: 1px dashed #111;
+  background: #f4f4f0;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 1.5px;
 }
 
+/* =========================
+   FILTERS
+========================= */
+
 .controls {
   position: absolute;
-  top: 105px;
-  left: 18px;
-  right: 18px;
+  top: 88px;
+  left: 16px;
+  right: 16px;
   z-index: 1000;
+
   display: flex;
-  gap: 6px;
+  gap: 5px;
+
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -84,58 +98,92 @@ html, body {
 }
 
 .filter {
-  border: 2px solid #000;
-  background: #fff;
-  color: #000;
-  padding: 9px 12px;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .5px;
-  white-space: nowrap;
-  box-shadow: 3px 3px 0 #000;
-}
+  flex-shrink: 0;
 
-.filter.active {
-  background: #000;
-  color: #fff;
-}
+  padding: 7px 10px;
 
-.add-button {
-  position: absolute;
-  bottom: 22px;
-  left: 18px;
-  right: 18px;
-  z-index: 1000;
-  border: 3px solid #000;
-  background: #fff;
-  color: #000;
-  padding: 16px;
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  box-shadow: 5px 5px 0 #000;
-}
+  border: 1px solid #111;
+  border-radius: 0;
 
-.stats {
-  position: absolute;
-  bottom: 90px;
-  left: 18px;
-  z-index: 1000;
-  background: #000;
-  color: #fff;
-  padding: 7px 9px;
+  background: #f4f4f0;
+  color: #111;
+
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 1px;
 }
 
+.filter.active {
+  background: #111;
+  color: #f4f4f0;
+}
+
+/* =========================
+   COUNTER
+========================= */
+
+.stats {
+  position: absolute;
+  left: 16px;
+  bottom: 85px;
+  z-index: 1000;
+
+  padding: 5px 7px;
+
+  border: 1px dashed #111;
+  background: rgba(244,244,240,.9);
+
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+/* =========================
+   ADD BUTTON
+========================= */
+
+.add-button {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+
+  z-index: 1000;
+
+  padding: 14px;
+
+  border: 2px solid #111;
+  border-radius: 0;
+
+  background: #f4f4f0;
+  color: #111;
+
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+}
+
+.add-button:active {
+  background: #111;
+  color: #f4f4f0;
+}
+
+/* =========================
+   MODAL
+========================= */
+
 .modal {
   display: none;
+
   position: fixed;
   inset: 0;
-  z-index: 2000;
-  background: rgba(0,0,0,.75);
-  padding: 18px;
+
+  z-index: 3000;
+
+  padding: 15px;
+
+  background: rgba(0,0,0,.65);
+
   align-items: center;
   justify-content: center;
 }
@@ -147,120 +195,179 @@ html, body {
 .panel {
   width: 100%;
   max-width: 500px;
-  max-height: 90vh;
+  max-height: 92vh;
+
   overflow-y: auto;
-  background: #fff;
-  color: #000;
-  border: 3px solid #000;
-  box-shadow: 8px 8px 0 #000;
-  padding: 18px;
+
+  padding: 17px;
+
+  background: #f4f4f0;
+  color: #111;
+
+  border: 2px solid #111;
 }
 
 .panel h2 {
   margin: 0 0 18px;
-  font-size: 26px;
+
+  font-size: 24px;
+  line-height: 1;
+
   letter-spacing: -1px;
 }
 
 .close {
   float: right;
-  border: 0;
-  background: #000;
-  color: #fff;
-  width: 32px;
-  height: 32px;
-  font-weight: 900;
+
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid #111;
+  border-radius: 0;
+
+  background: transparent;
+  color: #111;
+
   font-size: 18px;
+  font-weight: 900;
 }
 
 label {
   display: block;
+
   margin-top: 14px;
   margin-bottom: 5px;
-  font-size: 10px;
+
+  font-size: 9px;
   font-weight: 900;
-  letter-spacing: 1px;
+
+  letter-spacing: 1.2px;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
-  border: 2px solid #000;
+
+  padding: 10px;
+
+  border: 1px solid #111;
   border-radius: 0;
-  padding: 11px;
+
+  background: transparent;
+  color: #111;
+
   font-size: 14px;
-  background: #fff;
-  color: #000;
 }
 
 textarea {
-  min-height: 80px;
+  min-height: 75px;
   resize: vertical;
 }
 
 .submit {
   width: 100%;
-  margin-top: 18px;
-  padding: 14px;
-  border: 3px solid #000;
-  background: #000;
-  color: #fff;
-  font-size: 13px;
+
+  margin-top: 15px;
+  padding: 13px;
+
+  border: 2px solid #111;
+  border-radius: 0;
+
+  background: #111;
+  color: #f4f4f0;
+
+  font-size: 11px;
   font-weight: 900;
+
   letter-spacing: 1px;
 }
 
-#statusMessage {
-  margin-top: 12px;
-  font-size: 12px;
-  font-weight: 700;
+.submit:active {
+  background: transparent;
+  color: #111;
 }
 
+/* =========================
+   POPUP
+========================= */
+
 .archive-popup {
-  min-width: 180px;
+  min-width: 170px;
 }
 
 .archive-popup strong {
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: .5px;
 }
 
 .archive-popup img {
   width: 100%;
   max-height: 150px;
+
   object-fit: cover;
+
   margin-top: 8px;
+
+  filter: grayscale(1);
 }
 
 .archive-popup .meta {
-  margin-top: 6px;
-  font-size: 10px;
-  font-weight: 700;
+  margin-top: 5px;
+
+  font-size: 9px;
+  font-weight: 900;
+
   text-transform: uppercase;
 }
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
   border-radius: 0;
+  box-shadow: none;
+}
+
+.leaflet-popup-content {
+  margin: 10px;
 }
 
 .leaflet-control-zoom a {
   border-radius: 0 !important;
 }
 
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+  .logo {
+    font-size: 23px;
+  }
+
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
 @media (min-width: 700px) {
+
   .add-button {
     left: auto;
-    right: 25px;
+    right: 20px;
     width: 230px;
   }
 
   .stats {
     left: auto;
-    right: 25px;
+    right: 20px;
   }
 
   .controls {
     right: auto;
   }
+
 }
 </style>
 </head>
@@ -272,348 +379,800 @@ textarea {
   <div id="map"></div>
 
   <header class="header">
-    <div class="logo">STREET ARCHIVE</div><br>
-    <div class="subtitle">PUBLIC STREET ART DATABASE</div>
+
+    <div class="logo">
+      VALEN WORLD
+    </div>
+
+    <br>
+
+    <div class="subtitle">
+      STREET ART / PUBLIC ARCHIVE
+    </div>
+
   </header>
 
+
   <div class="controls">
-    <button class="filter active" data-filter="all">ALL</button>
-    <button class="filter" data-filter="sticker">STICKER</button>
-    <button class="filter" data-filter="tag">TAG</button>
-    <button class="filter" data-filter="graff">GRAFF</button>
+
+    <button class="filter active" data-filter="all">
+      ALL
+    </button>
+
+    <button class="filter" data-filter="sticker">
+      STICKER
+    </button>
+
+    <button class="filter" data-filter="tag">
+      TAG
+    </button>
+
+    <button class="filter" data-filter="graff">
+      GRAFF
+    </button>
+
   </div>
+
 
   <div class="stats">
-    <span id="counter">0</span> WORKS
+
+    <span id="counter">0</span>
+    &nbsp;WORKS
+
   </div>
 
+
   <button class="add-button" id="openModal">
+
     ＋ AJOUTER UNE ŒUVRE
+
   </button>
 
 </div>
 
+
+<!-- =========================
+     ADD MODAL
+========================= -->
+
 <div class="modal" id="modal">
+
   <div class="panel">
 
-    <button class="close" id="closeModal">×</button>
+    <button class="close" id="closeModal">
+      ×
+    </button>
 
-    <h2>AJOUTER UNE ŒUVRE</h2>
+    <h2>
+      AJOUTER UNE ŒUVRE
+    </h2>
+
 
     <form id="workForm">
 
-      <label>CATÉGORIE *</label>
+
+      <label>
+        CATÉGORIE *
+      </label>
+
       <select id="category" required>
-        <option value="">Sélectionner</option>
-        <option value="sticker">STICKER</option>
-        <option value="tag">TAG</option>
-        <option value="graff">GRAFF</option>
+
+        <option value="">
+          Sélectionner
+        </option>
+
+        <option value="sticker">
+          STICKER
+        </option>
+
+        <option value="tag">
+          TAG
+        </option>
+
+        <option value="graff">
+          GRAFF
+        </option>
+
       </select>
 
-      <label>PHOTO *</label>
-      <input type="file" id="photo" accept="image/*" required>
 
-      <label>ARTISTE / PSEUDO</label>
-      <input type="text" id="artist" placeholder="@pseudo">
+      <label>
+        PHOTO *
+      </label>
 
-      <label>DATE</label>
-      <input type="date" id="date">
+      <input
+        type="file"
+        id="photo"
+        accept="image/*"
+        required
+      >
 
-      <label>DESCRIPTION</label>
-      <textarea id="description" placeholder="Informations sur l'œuvre..."></textarea>
 
-      <label>LATITUDE *</label>
-      <input type="number" id="latitude" step="any" required>
+      <label>
+        ARTISTE / PSEUDO
+      </label>
 
-      <label>LONGITUDE *</label>
-      <input type="number" id="longitude" step="any" required>
+      <input
+        type="text"
+        id="artist"
+        placeholder="@pseudo"
+      >
 
-      <button type="button" id="locate" class="submit">
+
+      <label>
+        DATE
+      </label>
+
+      <input
+        type="date"
+        id="date"
+      >
+
+
+      <label>
+        DESCRIPTION
+      </label>
+
+      <textarea
+        id="description"
+        placeholder="Informations sur l'œuvre..."
+      ></textarea>
+
+
+      <label>
+        LATITUDE *
+      </label>
+
+      <input
+        type="number"
+        id="latitude"
+        step="any"
+        required
+      >
+
+
+      <label>
+        LONGITUDE *
+      </label>
+
+      <input
+        type="number"
+        id="longitude"
+        step="any"
+        required
+      >
+
+
+      <button
+        type="button"
+        id="locate"
+        class="submit"
+      >
         UTILISER MA POSITION
       </button>
 
-      <button type="submit" class="submit">
+
+      <button
+        type="submit"
+        class="submit"
+      >
         ENVOYER POUR VALIDATION
       </button>
 
+
       <div id="statusMessage"></div>
+
 
     </form>
 
   </div>
+
 </div>
+
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
-const SUPABASE_URL = "https://klvcugwhjaxmpvskplqd.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsdmN1Z3doamF4bXB2c2twbHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwODQzNTMsImV4cCI6MjEwMjY2MDM1M30.pEvX_uzDvUMTaZbeCWE071718XGGm0YAj6FgZaB6gVE";
 
-const map = L.map("map", {
-  zoomControl: false
-}).setView([48.8566, 2.3522], 5);
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+  "https://klvcugwhjaxmpvskplqd.supabase.co";
+
+const SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsdmN1Z3doamF4bXB2c2twbHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwODQzNTMsImV4cCI6MjEwMjY2MDM1M30.pEvX_uzDvUMTaZbeCWE071718XGGm0YAj6FgZaB6gVE";
+
+
+/* =========================
+   MAP
+========================= */
+
+const map =
+  L.map("map", {
+    zoomControl: false
+  }).setView(
+    [48.8566, 2.3522],
+    5
+  );
+
 
 L.control.zoom({
   position: "bottomright"
 }).addTo(map);
 
+
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   {
-    attribution: "© OpenStreetMap contributors"
+    attribution:
+      "© OpenStreetMap contributors"
   }
 ).addTo(map);
 
+
+/* =========================
+   DATA
+========================= */
+
 let works = [];
+
 let markers = [];
+
 let currentFilter = "all";
 
+
+/* =========================
+   MARKERS
+========================= */
+
 const markerStyles = {
+
   sticker: {
-    radius: 9
+    radius: 7,
+    dashArray: null
   },
+
   tag: {
-    radius: 7
+    radius: 6,
+    dashArray: "2,4"
   },
+
   graff: {
-    radius: 11
+    radius: 10,
+    dashArray: null
   }
+
 };
+
 
 function createMarker(work) {
 
-  const style = markerStyles[work.category] || markerStyles.sticker;
+  const style =
+    markerStyles[work.category]
+    || markerStyles.sticker;
 
-  const marker = L.circleMarker(
-    [work.latitude, work.longitude],
-    {
-      radius: style.radius,
-      color: "#000",
-      weight: 3,
-      fillColor: "#fff",
-      fillOpacity: 1
-    }
-  );
+
+  const marker =
+    L.circleMarker(
+      [
+        work.latitude,
+        work.longitude
+      ],
+      {
+        radius: style.radius,
+
+        color: "#111",
+
+        weight: 2,
+
+        dashArray:
+          style.dashArray,
+
+        fillColor: "#f4f4f0",
+
+        fillOpacity: 1
+      }
+    );
+
 
   let html = `
+
     <div class="archive-popup">
-      <strong>${(work.category || "WORK").toUpperCase()} #${work.id}</strong>
+
+      <strong>
+        ${(work.category || "WORK").toUpperCase()}
+        #${work.id}
+      </strong>
+
   `;
 
+
   if (work.photo_url) {
-    html += `<img src="${work.photo_url}" alt="">`;
+
+    html += `
+
+      <img
+        src="${work.photo_url}"
+        alt=""
+      >
+
+    `;
+
   }
+
 
   if (work.artist) {
-    html += `<div class="meta">${work.artist}</div>`;
+
+    html += `
+
+      <div class="meta">
+        ${work.artist}
+      </div>
+
+    `;
+
   }
+
 
   if (work.date) {
-    html += `<div class="meta">${work.date}</div>`;
+
+    html += `
+
+      <div class="meta">
+        ${work.date}
+      </div>
+
+    `;
+
   }
 
+
   if (work.description) {
-    html += `<p>${work.description}</p>`;
+
+    html += `
+
+      <p>
+        ${work.description}
+      </p>
+
+    `;
+
   }
+
 
   html += `</div>`;
 
+
   marker.bindPopup(html);
 
+
   return marker;
+
 }
+
+
+/* =========================
+   RENDER
+========================= */
 
 function renderMarkers() {
 
-  markers.forEach(marker => map.removeLayer(marker));
+  markers.forEach(
+    marker => map.removeLayer(marker)
+  );
+
   markers = [];
 
-  const filtered = currentFilter === "all"
-    ? works
-    : works.filter(w => w.category === currentFilter);
+
+  const filtered =
+    currentFilter === "all"
+      ? works
+      : works.filter(
+          w =>
+            w.category ===
+            currentFilter
+        );
+
 
   filtered.forEach(work => {
-    const marker = createMarker(work);
+
+    const marker =
+      createMarker(work);
+
     marker.addTo(map);
+
     markers.push(marker);
+
   });
 
-  document.getElementById("counter").textContent = filtered.length;
+
+  document.getElementById(
+    "counter"
+  ).textContent =
+    filtered.length;
+
 }
+
+
+/* =========================
+   LOAD WORKS
+========================= */
 
 async function loadWorks() {
 
   try {
 
-    const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/works?select=*&status=eq.approved`,
-      {
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": `Bearer ${SUPABASE_KEY}`
+    const response =
+      await fetch(
+        `${SUPABASE_URL}/rest/v1/works?select=*&status=eq.approved`,
+        {
+          headers: {
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              `Bearer ${SUPABASE_KEY}`
+          }
         }
-      }
-    );
+      );
+
 
     if (!response.ok) {
-      throw new Error("Impossible de charger les œuvres.");
+
+      throw new Error(
+        "Impossible de charger les œuvres."
+      );
+
     }
 
-    works = await response.json();
+
+    works =
+      await response.json();
+
 
     renderMarkers();
+
 
   } catch (error) {
 
     console.error(error);
 
   }
+
 }
 
-document.querySelectorAll(".filter").forEach(button => {
 
-  button.addEventListener("click", () => {
+loadWorks();
 
-    document.querySelectorAll(".filter")
-      .forEach(b => b.classList.remove("active"));
 
-    button.classList.add("active");
+/* =========================
+   FILTERS
+========================= */
 
-    currentFilter = button.dataset.filter;
+document
+  .querySelectorAll(".filter")
+  .forEach(button => {
 
-    renderMarkers();
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".filter")
+          .forEach(
+            b =>
+              b.classList
+                .remove("active")
+          );
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        currentFilter =
+          button.dataset.filter;
+
+
+        renderMarkers();
+
+      }
+    );
 
   });
 
-});
 
-const modal = document.getElementById("modal");
+/* =========================
+   MODAL
+========================= */
 
-document.getElementById("openModal").onclick = () => {
-  modal.classList.add("show");
-};
+const modal =
+  document.getElementById(
+    "modal"
+  );
 
-document.getElementById("closeModal").onclick = () => {
-  modal.classList.remove("show");
-};
 
-document.getElementById("locate").onclick = () => {
+document.getElementById(
+  "openModal"
+).onclick = () => {
 
-  if (!navigator.geolocation) {
-    alert("La géolocalisation n'est pas disponible.");
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    position => {
-
-      document.getElementById("latitude").value =
-        position.coords.latitude;
-
-      document.getElementById("longitude").value =
-        position.coords.longitude;
-
-    },
-    () => {
-      alert("Impossible d'obtenir votre position.");
-    }
+  modal.classList.add(
+    "show"
   );
 
 };
 
-document.getElementById("workForm").addEventListener(
+
+document.getElementById(
+  "closeModal"
+).onclick = () => {
+
+  modal.classList.remove(
+    "show"
+  );
+
+};
+
+
+/* =========================
+   GEOLOCATION
+========================= */
+
+document.getElementById(
+  "locate"
+).onclick = () => {
+
+  if (
+    !navigator.geolocation
+  ) {
+
+    alert(
+      "La géolocalisation n'est pas disponible."
+    );
+
+    return;
+
+  }
+
+
+  navigator.geolocation
+    .getCurrentPosition(
+
+      position => {
+
+        document.getElementById(
+          "latitude"
+        ).value =
+          position.coords.latitude;
+
+
+        document.getElementById(
+          "longitude"
+        ).value =
+          position.coords.longitude;
+
+      },
+
+      () => {
+
+        alert(
+          "Impossible d'obtenir votre position."
+        );
+
+      }
+
+    );
+
+};
+
+
+/* =========================
+   SUBMIT
+========================= */
+
+document.getElementById(
+  "workForm"
+).addEventListener(
   "submit",
   async event => {
 
     event.preventDefault();
 
-    const status = document.getElementById("statusMessage");
 
-    status.textContent = "ENVOI EN COURS...";
+    const status =
+      document.getElementById(
+        "statusMessage"
+      );
+
+
+    status.textContent =
+      "ENVOI EN COURS...";
+
 
     try {
 
       const file =
-        document.getElementById("photo").files[0];
+        document.getElementById(
+          "photo"
+        ).files[0];
+
 
       if (!file) {
-        throw new Error("Ajoute une photo.");
+
+        throw new Error(
+          "Ajoute une photo."
+        );
+
       }
+
 
       const filename =
-        `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "")}`;
+        `${Date.now()}-${file.name.replace(
+          /[^a-zA-Z0-9._-]/g,
+          ""
+        )}`;
 
-      const uploadResponse = await fetch(
-        `${SUPABASE_URL}/storage/v1/object/works/${filename}`,
-        {
-          method: "POST",
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${SUPABASE_KEY}`,
-            "Content-Type": file.type
-          },
-          body: file
-        }
-      );
+
+      const uploadResponse =
+        await fetch(
+
+          `${SUPABASE_URL}/storage/v1/object/works/${filename}`,
+
+          {
+            method: "POST",
+
+            headers: {
+
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                `Bearer ${SUPABASE_KEY}`,
+
+              "Content-Type":
+                file.type
+
+            },
+
+            body: file
+
+          }
+
+        );
+
 
       if (!uploadResponse.ok) {
+
         throw new Error(
-          "La photo n'a pas pu être envoyée. Les permissions du stockage doivent encore être configurées."
+          "La photo n'a pas pu être envoyée."
         );
+
       }
+
 
       const photoUrl =
         `${SUPABASE_URL}/storage/v1/object/public/works/${filename}`;
 
+
       const payload = {
-        category: document.getElementById("category").value,
-        latitude: Number(document.getElementById("latitude").value),
-        longitude: Number(document.getElementById("longitude").value),
-        photo_url: photoUrl,
-        artist: document.getElementById("artist").value || null,
-        description: document.getElementById("description").value || null,
-        date: document.getElementById("date").value || null,
-        status: "pending"
+
+        category:
+          document.getElementById(
+            "category"
+          ).value,
+
+        latitude:
+          Number(
+            document.getElementById(
+              "latitude"
+            ).value
+          ),
+
+        longitude:
+          Number(
+            document.getElementById(
+              "longitude"
+            ).value
+          ),
+
+        photo_url:
+          photoUrl,
+
+        artist:
+          document.getElementById(
+            "artist"
+          ).value || null,
+
+        description:
+          document.getElementById(
+            "description"
+          ).value || null,
+
+        date:
+          document.getElementById(
+            "date"
+          ).value || null,
+
+        status:
+          "pending"
+
       };
 
-      const insertResponse = await fetch(
-        `${SUPABASE_URL}/rest/v1/works`,
-        {
-          method: "POST",
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${SUPABASE_KEY}`,
-            "Content-Type": "application/json",
-            "Prefer": "return=minimal"
-          },
-          body: JSON.stringify(payload)
-        }
-      );
+
+      const insertResponse =
+        await fetch(
+
+          `${SUPABASE_URL}/rest/v1/works`,
+
+          {
+
+            method: "POST",
+
+            headers: {
+
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                `Bearer ${SUPABASE_KEY}`,
+
+              "Content-Type":
+                "application/json",
+
+              "Prefer":
+                "return=minimal"
+
+            },
+
+            body:
+              JSON.stringify(
+                payload
+              )
+
+          }
+
+        );
+
 
       if (!insertResponse.ok) {
+
         throw new Error(
           "L'œuvre n'a pas pu être enregistrée."
         );
+
       }
 
-      status.textContent =
-        "✓ ŒUVRE ENVOYÉE — EN ATTENTE DE VALIDATION.";
 
-      document.getElementById("workForm").reset();
+      status.textContent =
+        "✓ ENVOYÉ — EN ATTENTE DE VALIDATION";
+
+
+      document
+        .getElementById(
+          "workForm"
+        )
+        .reset();
+
 
     } catch (error) {
 
       console.error(error);
 
+
       status.textContent =
-        "ERREUR : " + error.message;
+        "ERREUR : " +
+        error.message;
 
     }
 
   }
+
 );
 
-loadWorks();
 </script>
 
 </body>
