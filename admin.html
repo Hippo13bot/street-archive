@@ -455,10 +455,13 @@ input {
       </h1>
 
       <div class="counter">
+
         <span id="counter">
           0
         </span>
+
         EN ATTENTE
+
       </div>
 
     </div>
@@ -505,17 +508,24 @@ async function supabaseRequest(
     await fetch(
       `${SUPABASE_URL}${url}`,
       {
+
         ...options,
 
         headers: {
-          "apikey": SUPABASE_KEY,
+
+          "apikey":
+            SUPABASE_KEY,
 
           ...options.headers
+
         }
+
       }
     );
 
+
   return response;
+
 }
 
 
@@ -531,20 +541,24 @@ document
 
       event.preventDefault();
 
+
       const email =
         document
           .getElementById("email")
           .value
           .trim();
 
+
       const password =
         document
           .getElementById("password")
           .value;
 
+
       const error =
         document
           .getElementById("loginError");
+
 
       error.textContent =
         "CONNEXION...";
@@ -556,18 +570,28 @@ document
           await supabaseRequest(
             "/auth/v1/token?grant_type=password",
             {
-              method: "POST",
+
+              method:
+                "POST",
 
               headers: {
+
                 "Content-Type":
                   "application/json"
+
               },
 
               body:
                 JSON.stringify({
-                  email,
-                  password
+
+                  email:
+                    email,
+
+                  password:
+                    password
+
                 })
+
             }
           );
 
@@ -576,7 +600,9 @@ document
           await response.json();
 
 
-        if (!response.ok) {
+        if (
+          !response.ok
+        ) {
 
           throw new Error(
             data.error_description ||
@@ -605,7 +631,9 @@ document
         showAdmin();
 
 
-      } catch (err) {
+      } catch (
+        err
+      ) {
 
         error.textContent =
           err.message;
@@ -624,11 +652,15 @@ function showAdmin() {
 
   document
     .getElementById("loginScreen")
-    .style.display = "none";
+    .style.display =
+    "none";
+
 
   document
     .getElementById("adminApp")
-    .style.display = "block";
+    .style.display =
+    "block";
+
 
   loadPendingWorks();
 
@@ -658,11 +690,12 @@ async function loadPendingWorks() {
     document.getElementById("works");
 
 
-  container.innerHTML = `
-    <div class="empty">
-      CHARGEMENT...
-    </div>
-  `;
+  container.innerHTML =
+    `
+      <div class="empty">
+        CHARGEMENT...
+      </div>
+    `;
 
 
   try {
@@ -672,12 +705,8 @@ async function loadPendingWorks() {
 
 
     /*
-      IMPORTANT :
-
-      On récupère toutes les œuvres
-      dont status = pending.
-
-      La colonne d'identifiant s'appelle "Id".
+      On récupère uniquement
+      les œuvres en attente.
     */
 
     const response =
@@ -686,6 +715,7 @@ async function loadPendingWorks() {
         `${SUPABASE_URL}/rest/v1/works?select=*&status=eq.pending&order=created_at.desc`,
 
         {
+
           headers: {
 
             "apikey":
@@ -695,6 +725,7 @@ async function loadPendingWorks() {
               `Bearer ${token}`
 
           }
+
         }
 
       );
@@ -704,7 +735,9 @@ async function loadPendingWorks() {
       await response.json();
 
 
-    if (!response.ok) {
+    if (
+      !response.ok
+    ) {
 
       throw new Error(
         data.message ||
@@ -720,43 +753,54 @@ async function loadPendingWorks() {
       data.length;
 
 
-    if (data.length === 0) {
+    if (
+      data.length === 0
+    ) {
 
-      container.innerHTML = `
-        <div class="empty">
-          AUCUNE ŒUVRE EN ATTENTE
-        </div>
-      `;
+      container.innerHTML =
+        `
+          <div class="empty">
+            AUCUNE ŒUVRE EN ATTENTE
+          </div>
+        `;
 
       return;
 
     }
 
 
-    container.innerHTML = "";
+    container.innerHTML =
+      "";
 
 
     data.forEach(
       work => {
 
         container.appendChild(
-          createWorkCard(work)
+          createWorkCard(
+            work
+          )
         );
 
       }
     );
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
-    container.innerHTML = `
-      <div class="empty">
-        ERREUR DE CHARGEMENT
-      </div>
-    `;
+    container.innerHTML =
+      `
+        <div class="empty">
+          ERREUR DE CHARGEMENT
+        </div>
+      `;
 
   }
 
@@ -772,22 +816,13 @@ function createWorkCard(
 ) {
 
   const article =
-    document.createElement("article");
+    document.createElement(
+      "article"
+    );
 
 
   article.className =
     "work";
-
-
-  /*
-    IMPORTANT :
-
-    L'identifiant de ta table est "Id"
-    avec un I majuscule.
-  */
-
-  const workId =
-    work.Id;
 
 
   article.innerHTML = `
@@ -797,7 +832,9 @@ function createWorkCard(
         ? `
           <img
             class="photo"
-            src="${escapeHTML(work.photo_url)}"
+            src="${escapeHTML(
+              work.photo_url
+            )}"
             alt="Œuvre"
           >
         `
@@ -810,20 +847,25 @@ function createWorkCard(
 
         ${escapeHTML(
           (
-            work.category || ""
+            work.category ||
+            ""
           ).toUpperCase()
         )}
 
       </div>
 
+
       <div class="date">
 
         DATE :
+
         ${escapeHTML(
-          work.date || "—"
+          work.date ||
+          "—"
         )}
 
       </div>
+
 
       <div class="location">
 
@@ -844,14 +886,15 @@ function createWorkCard(
 
         <button
           class="approve"
-          data-id="${workId}"
+          data-id="${work.id}"
         >
           ✓ APPROUVER
         </button>
 
+
         <button
           class="reject"
-          data-id="${workId}"
+          data-id="${work.id}"
         >
           ✕ REFUSER
         </button>
@@ -861,7 +904,7 @@ function createWorkCard(
 
       <div
         class="status"
-        id="status-${workId}"
+        id="status-${work.id}"
       ></div>
 
     </div>
@@ -874,7 +917,7 @@ function createWorkCard(
       "click",
       () =>
         moderateWork(
-          workId,
+          work.id,
           "approved"
         )
     );
@@ -886,7 +929,7 @@ function createWorkCard(
       "click",
       () =>
         moderateWork(
-          workId,
+          work.id,
           "rejected"
         )
     );
@@ -933,6 +976,7 @@ async function moderateWork(
         `${SUPABASE_URL}/auth/v1/user`,
 
         {
+
           headers: {
 
             "apikey":
@@ -942,6 +986,7 @@ async function moderateWork(
               `Bearer ${token}`
 
           }
+
         }
 
       );
@@ -951,7 +996,9 @@ async function moderateWork(
       await userResponse.json();
 
 
-    if (!user.id) {
+    if (
+      !user.id
+    ) {
 
       throw new Error(
         "Session expirée."
@@ -961,19 +1008,21 @@ async function moderateWork(
 
 
     /*
-      IMPORTANT :
+      Modification de l'œuvre.
 
-      La colonne de la table works
-      s'appelle "Id" avec un I majuscule.
+      La colonne s'appelle maintenant
+      "id" en minuscules.
     */
 
     const response =
       await fetch(
 
-        `${SUPABASE_URL}/rest/v1/works?Id=eq.${encodeURIComponent(id)}`,
+        `${SUPABASE_URL}/rest/v1/works?id=eq.${encodeURIComponent(id)}`,
 
         {
-          method: "PATCH",
+
+          method:
+            "PATCH",
 
           headers: {
 
@@ -1010,7 +1059,9 @@ async function moderateWork(
       );
 
 
-    if (!response.ok) {
+    if (
+      !response.ok
+    ) {
 
       const error =
         await response.text();
@@ -1025,16 +1076,19 @@ async function moderateWork(
 
 
     /*
-      Recharge la liste
-      après validation/refus.
+      Recharge la liste.
     */
 
     await loadPendingWorks();
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     statusElement.textContent =
@@ -1078,28 +1132,25 @@ function escapeHTML(
   value
 ) {
 
-  return String(value)
-
+  return String(
+    value
+  )
     .replace(
       /&/g,
       "&amp;"
     )
-
     .replace(
       /</g,
       "&lt;"
     )
-
     .replace(
       />/g,
       "&gt;"
     )
-
     .replace(
       /"/g,
       "&quot;"
     )
-
     .replace(
       /'/g,
       "&#039;"
@@ -1112,7 +1163,9 @@ function escapeHTML(
    EXISTING SESSION
 ========================= */
 
-if (getToken()) {
+if (
+  getToken()
+) {
 
   showAdmin();
 
