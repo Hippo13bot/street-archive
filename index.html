@@ -320,6 +320,45 @@ select {
 
 
 /* =========================
+   PHOTO PREVIEW
+========================= */
+
+.photo-preview {
+  display: none;
+
+  width: 100%;
+
+  max-height: 220px;
+
+  margin-top: 8px;
+
+  object-fit: cover;
+
+  border: 1px solid #111;
+
+  filter: grayscale(1);
+}
+
+.photo-preview.show {
+  display: block;
+}
+
+.photo-gps-status {
+  margin-top: 6px;
+
+  padding: 7px;
+
+  border: 1px dashed #111;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  line-height: 1.4;
+}
+
+
+/* =========================
    LOCATION
 ========================= */
 
@@ -696,6 +735,21 @@ select {
       >
 
 
+      <img
+        id="photoPreview"
+        class="photo-preview"
+        alt="Prévisualisation"
+      >
+
+
+      <div
+        id="photoGpsStatus"
+        class="photo-gps-status"
+      >
+        AUCUNE PHOTO SÉLECTIONNÉE
+      </div>
+
+
       <!-- LOCATION -->
 
       <label>
@@ -789,8 +843,17 @@ select {
 
 
 
+<!-- LEAFLET -->
+
 <script
   src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- EXIF / GPS -->
+
+<script
+  src="https://cdn.jsdelivr.net/npm/exifr/dist/lite.umd.js"
 ></script>
 
 
@@ -804,7 +867,7 @@ const SUPABASE_URL =
   "https://klvcugwhjaxmpvskplqd.supabase.co";
 
 const SUPABASE_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsdmN1Z3doamF4bXB2c2twbHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwODQzNTMsImV4cCI6MjEwMjY2MDM1M30.pEvX_uzDvUMTaZbeCWE071718XGGm0YAj6FgZaB6gVE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXAiLCJyZWYiOiJrbHZjdWd3aGpheG1wdnNrcGxxZCIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzg3MDg0MzUzLCJleHAiOjIxMDI2NjAzNTN9.pEvX_uzDvUMTaZbeCWE071718XGGm0YAj6FgZaB6gVE";
 
 
 /* =========================
@@ -974,7 +1037,7 @@ function createMarker(work) {
     html += `
 
       <img
-        src="${work.photo_url}"
+        src="${escapeHTML(work.photo_url)}"
         alt=""
       >
 
@@ -989,7 +1052,7 @@ function createMarker(work) {
 
       <div class="meta">
 
-        ${work.date}
+        ${escapeHTML(work.date)}
 
       </div>
 
@@ -1276,6 +1339,220 @@ function setLocation(
 
 
 /* =========================
+   PHOTO PREVIEW + GPS EXIF
+========================= */
+
+document.getElementById(
+  "photo"
+).addEventListener(
+  "change",
+  async function() {
+
+    const file =
+      this.files[0];
+
+
+    const preview =
+      document.getElementById(
+        "photoPreview"
+      );
+
+
+    const gpsStatus =
+      document.getElementById(
+        "photoGpsStatus"
+      );
+
+
+    if (!file) {
+
+      preview.src = "";
+
+      preview.classList.remove(
+        "show"
+      );
+
+      gpsStatus.textContent =
+        "AUCUNE PHOTO SÉLECTIONNÉE";
+
+      return;
+
+    }
+
+
+    /* =====================
+       PREVIEW
+    ===================== */
+
+    const imageUrl =
+      URL.createObjectURL(
+        file
+      );
+
+
+    preview.src =
+      imageUrl;
+
+
+    preview.classList.add(
+      "show"
+    );
+
+
+    /* =====================
+       RESET LOCATION
+    ===================== */
+
+    selectedLatitude =
+      null;
+
+    selectedLongitude =
+      null;
+
+
+    if (
+      temporaryMarker
+    ) {
+
+      map.removeLayer(
+        temporaryMarker
+      );
+
+      temporaryMarker =
+        null;
+
+    }
+
+
+    document.getElementById(
+      "locationInfo"
+    ).textContent =
+      "RECHERCHE DU GPS DE LA PHOTO...";
+
+
+    gpsStatus.textContent =
+      "LECTURE DES MÉTADONNÉES GPS...";
+
+
+    /* =====================
+       EXIF GPS
+    ===================== */
+
+    try {
+
+      const gps =
+        await exifr.gps(
+          file
+        );
+
+
+      if (
+        !gps ||
+        typeof gps.latitude !== "number" ||
+        typeof gps.longitude !== "number"
+      ) {
+
+        gpsStatus.textContent =
+          "○ AUCUN GPS DANS LA PHOTO";
+
+
+        document.getElementById(
+          "locationInfo"
+        ).textContent =
+          "AUCUNE LOCALISATION — UTILISE UNE ADRESSE OU LA CARTE.";
+
+
+        return;
+
+      }
+
+
+      const latitude =
+        gps.latitude;
+
+
+      const longitude =
+        gps.longitude;
+
+
+      if (
+        latitude < -90 ||
+        latitude > 90 ||
+        longitude < -180 ||
+        longitude > 180
+      ) {
+
+        throw new Error(
+          "Coordonnées GPS invalides."
+        );
+
+      }
+
+
+      /* =====================
+         AUTO LOCATION
+      ===================== */
+
+      setLocation(
+
+        latitude,
+
+        longitude,
+
+        "✓ LOCALISATION GPS DE LA PHOTO"
+
+      );
+
+
+      map.setView(
+        [
+          latitude,
+          longitude
+        ],
+        17
+      );
+
+
+      gpsStatus.textContent =
+        "✓ GPS TROUVÉ — LOCALISATION AUTOMATIQUE";
+
+
+      document.getElementById(
+        "locationInfo"
+      ).textContent =
+
+        "✓ GPS DE LA PHOTO : " +
+        latitude.toFixed(6) +
+        " , " +
+        longitude.toFixed(6);
+
+
+    } catch (
+      error
+    ) {
+
+      console.warn(
+        "GPS EXIF impossible :",
+        error
+      );
+
+
+      gpsStatus.textContent =
+        "○ GPS NON DISPONIBLE";
+
+
+      document.getElementById(
+        "locationInfo"
+      ).textContent =
+        "AUCUNE LOCALISATION — UTILISE UNE ADRESSE OU LA CARTE.";
+
+    }
+
+  }
+);
+
+
+/* =========================
    ADDRESS SEARCH
 ========================= */
 
@@ -1415,7 +1692,7 @@ document.getElementById(
 
 
 /* =========================
-   GPS
+   GPS / CURRENT POSITION
 ========================= */
 
 document.getElementById(
@@ -1434,6 +1711,16 @@ document.getElementById(
       return;
 
     }
+
+
+    const button =
+      document.getElementById(
+        "gpsButton"
+      );
+
+
+    button.textContent =
+      "LOCALISATION...";
 
 
     navigator.geolocation
@@ -1468,9 +1755,17 @@ document.getElementById(
             17
           );
 
+
+          button.textContent =
+            "MA POSITION";
+
         },
 
         () => {
+
+          button.textContent =
+            "MA POSITION";
+
 
           alert(
             "Impossible d'obtenir votre position."
@@ -1616,11 +1911,16 @@ document.getElementById(
          UPLOAD PHOTO
       ===================== */
 
+      const safeFilename =
+        file.name
+          .replace(
+            /[^a-zA-Z0-9._-]/g,
+            ""
+          );
+
+
       const filename =
-        `${Date.now()}-${file.name.replace(
-          /[^a-zA-Z0-9._-]/g,
-          ""
-        )}`;
+        `${Date.now()}-${safeFilename}`;
 
 
       const uploadResponse =
@@ -1657,6 +1957,15 @@ document.getElementById(
       if (
         !uploadResponse.ok
       ) {
+
+        const uploadError =
+          await uploadResponse.text();
+
+
+        console.error(
+          uploadError
+        );
+
 
         throw new Error(
           "La photo n'a pas pu être envoyée."
@@ -1740,6 +2049,15 @@ document.getElementById(
         !insertResponse.ok
       ) {
 
+        const insertError =
+          await insertResponse.text();
+
+
+        console.error(
+          insertError
+        );
+
+
         throw new Error(
           "L'œuvre n'a pas pu être enregistrée."
         );
@@ -1775,6 +2093,24 @@ document.getElementById(
         "AUCUNE LOCALISATION SÉLECTIONNÉE";
 
 
+      document.getElementById(
+        "photoGpsStatus"
+      ).textContent =
+        "AUCUNE PHOTO SÉLECTIONNÉE";
+
+
+      document.getElementById(
+        "photoPreview"
+      ).src = "";
+
+
+      document.getElementById(
+        "photoPreview"
+      ).classList.remove(
+        "show"
+      );
+
+
       if (
         temporaryMarker
       ) {
@@ -1789,7 +2125,10 @@ document.getElementById(
       }
 
 
-      /* Remettre automatiquement la date du jour */
+      /*
+        Date automatiquement remise
+        à aujourd'hui.
+      */
 
       document.getElementById(
         "date"
@@ -1814,6 +2153,41 @@ document.getElementById(
 
   }
 );
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(
+  value
+) {
+
+  return String(
+    value
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
 
 </script>
 
