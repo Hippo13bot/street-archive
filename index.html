@@ -6,12 +6,25 @@
 
 <title>VALEN WORLD</title>
 
+<!-- LEAFLET -->
 <link
   rel="stylesheet"
   href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 />
 
+<!-- LEAFLET MARKER CLUSTER -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+/>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
+/>
+
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -41,7 +54,10 @@ body {
   filter: grayscale(1) contrast(.9);
 }
 
-/* HEADER */
+
+/* =====================================================
+   HEADER / LOGO
+===================================================== */
 
 .header {
   position: absolute;
@@ -51,29 +67,47 @@ body {
   pointer-events: none;
 }
 
-.logo {
+.brand {
   display: inline-block;
-  padding: 4px 7px 3px;
-  border: 2px solid #111;
-  background: #f4f4f0;
-  font-size: 25px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: -1.8px;
+  color: #fff;
+  line-height: .8;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
 }
 
-.subtitle {
-  display: inline-block;
-  margin-top: 5px;
-  padding: 4px 6px;
-  border: 1px dashed #111;
-  background: #f4f4f0;
+.brand-main {
+  font-family:
+    Impact,
+    Haettenschweiler,
+    "Arial Narrow Bold",
+    sans-serif;
+
+  font-size: 58px;
+  font-weight: 900;
+  letter-spacing: -4px;
+
+  transform: scaleX(.9);
+  transform-origin: left center;
+}
+
+.brand-sub {
+  margin-top: 10px;
+  margin-left: 8px;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 7px;
 }
 
-/* FILTERS */
+
+/* =====================================================
+   FILTERS
+===================================================== */
 
 .controls {
   position: absolute;
@@ -81,9 +115,12 @@ body {
   left: 16px;
   right: 16px;
   z-index: 1000;
+
   display: flex;
   gap: 5px;
+
   overflow-x: auto;
+
   scrollbar-width: none;
 }
 
@@ -93,11 +130,15 @@ body {
 
 .filter {
   flex-shrink: 0;
+
   padding: 7px 10px;
+
   border: 1px solid #111;
   border-radius: 0;
+
   background: #f4f4f0;
   color: #111;
+
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 1px;
@@ -108,34 +149,49 @@ body {
   color: #f4f4f0;
 }
 
-/* STATS */
+
+/* =====================================================
+   STATS
+===================================================== */
 
 .stats {
   position: absolute;
   left: 16px;
   bottom: 85px;
   z-index: 1000;
+
   padding: 5px 7px;
+
   border: 1px dashed #111;
+
   background: rgba(244,244,240,.9);
+
   font-size: 9px;
   font-weight: 900;
   letter-spacing: 1px;
 }
 
-/* ADD */
+
+/* =====================================================
+   ADD BUTTON
+===================================================== */
 
 .add-button {
   position: absolute;
   left: 16px;
   right: 16px;
   bottom: 18px;
+
   z-index: 1000;
+
   padding: 14px;
+
   border: 2px solid #111;
   border-radius: 0;
+
   background: #f4f4f0;
   color: #111;
+
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 1.2px;
@@ -146,15 +202,61 @@ body {
   color: #f4f4f0;
 }
 
-/* MODAL */
+
+/* =====================================================
+   CLUSTERING
+===================================================== */
+
+.custom-cluster {
+  background: transparent;
+}
+
+.cluster-number {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #111;
+  border-radius: 50%;
+
+  background: #111;
+  color: #fff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  box-shadow: none;
+}
+
+.leaflet-marker-icon {
+  filter: none;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
 
 .modal {
   display: none;
+
   position: fixed;
   inset: 0;
+
   z-index: 3000;
+
   padding: 15px;
+
   background: rgba(0,0,0,.65);
+
   align-items: center;
   justify-content: center;
 }
@@ -167,49 +269,69 @@ body {
   width: 100%;
   max-width: 500px;
   max-height: 92vh;
+
   overflow-y: auto;
+
   padding: 17px;
+
   background: #f4f4f0;
   color: #111;
+
   border: 2px solid #111;
 }
 
 .panel h2 {
   margin: 0 0 18px;
+
   font-size: 24px;
   line-height: 1;
+
   letter-spacing: -1px;
 }
 
 .close {
   float: right;
+
   width: 30px;
   height: 30px;
+
   border: 1px solid #111;
+
   background: transparent;
+
   font-size: 18px;
   font-weight: 900;
 }
 
-/* FORM */
+
+/* =====================================================
+   FORM
+===================================================== */
 
 label {
   display: block;
+
   margin-top: 14px;
   margin-bottom: 5px;
+
   font-size: 9px;
   font-weight: 900;
+
   letter-spacing: 1.2px;
 }
 
 input,
 select {
   width: 100%;
+
   padding: 10px;
+
   border: 1px solid #111;
   border-radius: 0;
+
   background: transparent;
   color: #111;
+
   font-size: 14px;
 }
 
@@ -219,18 +341,25 @@ input[type="file"] {
 
 .location-buttons {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 6px;
+
   margin-top: 7px;
 }
 
 .location-button {
   padding: 11px 7px;
+
   border: 1px solid #111;
+
   background: transparent;
   color: #111;
+
   font-size: 9px;
   font-weight: 900;
+
   letter-spacing: .7px;
 }
 
@@ -241,33 +370,48 @@ input[type="file"] {
 
 .location-info {
   margin-top: 7px;
+
   padding: 7px;
+
   border: 1px dashed #111;
+
   font-size: 9px;
   font-weight: 700;
+
   line-height: 1.4;
 }
 
 .submit {
   width: 100%;
+
   margin-top: 15px;
+
   padding: 13px;
+
   border: 2px solid #111;
+
   background: #111;
   color: #f4f4f0;
+
   font-size: 11px;
   font-weight: 900;
+
   letter-spacing: 1px;
 }
 
 #statusMessage {
   margin-top: 10px;
+
   font-size: 10px;
   font-weight: 900;
+
   line-height: 1.4;
 }
 
-/* POPUP */
+
+/* =====================================================
+   POPUP
+===================================================== */
 
 .archive-popup {
   min-width: 170px;
@@ -280,15 +424,20 @@ input[type="file"] {
 .archive-popup img {
   width: 100%;
   max-height: 150px;
+
   object-fit: cover;
+
   margin-top: 8px;
+
   filter: grayscale(1);
 }
 
 .archive-popup .meta {
   margin-top: 5px;
+
   font-size: 9px;
   font-weight: 900;
+
   text-transform: uppercase;
 }
 
@@ -302,28 +451,49 @@ input[type="file"] {
   border-radius: 0 !important;
 }
 
-/* PLACEMENT */
+
+/* =====================================================
+   PLACEMENT
+===================================================== */
 
 #map-placement-message {
   display: none;
+
   position: absolute;
+
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
+  transform:
+    translate(-50%, -50%);
+
   z-index: 2500;
+
   padding: 10px 12px;
+
   border: 2px solid #111;
+
   background: #f4f4f0;
+
   font-size: 11px;
   font-weight: 900;
+
   letter-spacing: 1px;
+
   text-align: center;
 }
 
+
+/* =====================================================
+   DESKTOP
+===================================================== */
+
 @media (min-width: 700px) {
+
   .add-button {
     left: auto;
     right: 20px;
+
     width: 230px;
   }
 
@@ -335,9 +505,12 @@ input[type="file"] {
   .controls {
     right: auto;
   }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -345,71 +518,128 @@ input[type="file"] {
 
   <div id="map"></div>
 
+
   <div id="map-placement-message">
     TOUCHEZ LA CARTE POUR PLACER L'ŒUVRE
   </div>
 
+
+  <!-- HEADER -->
+
   <header class="header">
-    <div class="logo">VALEN WORLD</div>
-    <br>
-    <div class="subtitle">
-      STREET ART / PUBLIC ARCHIVE
+
+    <div class="brand">
+
+      <div class="brand-main">
+        VALEN
+      </div>
+
+      <div class="brand-sub">
+        W O R L D
+      </div>
+
     </div>
+
   </header>
+
+
+  <!-- FILTERS -->
 
   <div class="controls">
 
-    <button class="filter active" data-filter="all">
+    <button
+      class="filter active"
+      data-filter="all"
+    >
       ALL
     </button>
 
-    <button class="filter" data-filter="sticker">
+    <button
+      class="filter"
+      data-filter="sticker"
+    >
       STICKER
     </button>
 
-    <button class="filter" data-filter="tag">
+    <button
+      class="filter"
+      data-filter="tag"
+    >
       TAG
     </button>
 
-    <button class="filter" data-filter="graff">
+    <button
+      class="filter"
+      data-filter="graff"
+    >
       GRAFF
     </button>
 
   </div>
 
+
+  <!-- STATS -->
+
   <div class="stats">
-    <span id="counter">0</span>
+
+    <span id="counter">
+      0
+    </span>
+
     &nbsp;WORKS
+
   </div>
 
-  <button class="add-button" id="openModal">
+
+  <!-- ADD -->
+
+  <button
+    class="add-button"
+    id="openModal"
+  >
     ＋ AJOUTER UNE ŒUVRE
   </button>
 
 </div>
 
 
-<!-- FORMULAIRE -->
+<!-- =====================================================
+     FORMULAIRE
+===================================================== -->
 
-<div class="modal" id="modal">
+<div
+  class="modal"
+  id="modal"
+>
 
   <div class="panel">
 
-    <button class="close" id="closeModal">
+    <button
+      class="close"
+      id="closeModal"
+    >
       ×
     </button>
+
 
     <h2>
       AJOUTER UNE ŒUVRE
     </h2>
 
+
     <form id="workForm">
+
+
+      <!-- CATÉGORIE -->
 
       <label>
         CATÉGORIE *
       </label>
 
-      <select id="category" required>
+      <select
+        id="category"
+        required
+      >
 
         <option value="">
           Sélectionner
@@ -430,6 +660,8 @@ input[type="file"] {
       </select>
 
 
+      <!-- PHOTO -->
+
       <label>
         PHOTO *
       </label>
@@ -441,6 +673,7 @@ input[type="file"] {
         required
       >
 
+
       <div
         id="photoInfo"
         class="location-info"
@@ -448,15 +681,19 @@ input[type="file"] {
       ></div>
 
 
+      <!-- LOCALISATION -->
+
       <label>
         LOCALISATION
       </label>
+
 
       <input
         type="text"
         id="address"
         placeholder="Entrer une adresse"
       >
+
 
       <div class="location-buttons">
 
@@ -468,6 +705,7 @@ input[type="file"] {
           UTILISER L'ADRESSE
         </button>
 
+
         <button
           type="button"
           class="location-button"
@@ -478,6 +716,7 @@ input[type="file"] {
 
       </div>
 
+
       <button
         type="button"
         class="location-button"
@@ -487,6 +726,7 @@ input[type="file"] {
         PLACER SUR LA CARTE
       </button>
 
+
       <div
         class="location-info"
         id="locationInfo"
@@ -495,15 +735,19 @@ input[type="file"] {
       </div>
 
 
+      <!-- DATE -->
+
       <label>
         DATE DE L'ŒUVRE
       </label>
+
 
       <input
         type="date"
         id="date"
         required
       >
+
 
       <div
         class="location-info"
@@ -513,6 +757,8 @@ input[type="file"] {
       </div>
 
 
+      <!-- SUBMIT -->
+
       <button
         type="submit"
         class="submit"
@@ -520,7 +766,11 @@ input[type="file"] {
         ENVOYER POUR VALIDATION
       </button>
 
-      <div id="statusMessage"></div>
+
+      <div
+        id="statusMessage"
+      ></div>
+
 
     </form>
 
@@ -529,12 +779,33 @@ input[type="file"] {
 </div>
 
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- =====================================================
+     LIBRAIRIES
+===================================================== -->
 
-<!-- Lecture EXIF : date + GPS -->
-<script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/lite.umd.js"></script>
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<script
+  src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
+></script>
+
+
+<!-- EXIF -->
+<script
+  src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/lite.umd.js"
+></script>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.js"
+></script>
+
 
 <script>
+
 
 /* =====================================================
    SUPABASE
@@ -580,8 +851,6 @@ L.tileLayer(
 
 let works = [];
 
-let markers = [];
-
 let currentFilter = "all";
 
 let selectedLatitude = null;
@@ -594,165 +863,517 @@ let placementMode = false;
 
 
 /* =====================================================
+   MARKER CLUSTER
+===================================================== */
+
+const markerCluster =
+  L.markerClusterGroup({
+
+    showCoverageOnHover:
+      false,
+
+    spiderfyOnMaxZoom:
+      true,
+
+    disableClusteringAtZoom:
+      14,
+
+    maxClusterRadius:
+      55,
+
+    iconCreateFunction:
+      function(cluster) {
+
+        const count =
+          cluster.getChildCount();
+
+
+        return L.divIcon({
+
+          html: `
+            <div class="cluster-number">
+              ${count}
+            </div>
+          `,
+
+          className:
+            "custom-cluster",
+
+          iconSize:
+            [48, 48]
+
+        });
+
+      }
+
+  });
+
+
+map.addLayer(
+  markerCluster
+);
+
+
+/* =====================================================
    DATE DU JOUR
 ===================================================== */
 
 function getToday() {
 
-  const d = new Date();
+  const d =
+    new Date();
+
 
   return (
     d.getFullYear() +
     "-" +
-    String(d.getMonth() + 1).padStart(2, "0") +
+    String(
+      d.getMonth() + 1
+    ).padStart(2, "0") +
     "-" +
-    String(d.getDate()).padStart(2, "0")
+    String(
+      d.getDate()
+    ).padStart(2, "0")
   );
 
 }
 
-document.getElementById("date").value =
+
+document.getElementById(
+  "date"
+).value =
   getToday();
+
+
+/* =====================================================
+   EXIF — ANCIEN FORMAT
+===================================================== */
+
+function convertGPS(
+  coordinate,
+  reference
+) {
+
+  if (!coordinate) {
+    return null;
+  }
+
+
+  const degrees =
+    coordinate[0];
+
+  const minutes =
+    coordinate[1];
+
+  const seconds =
+    coordinate[2];
+
+
+  let decimal =
+    degrees +
+    minutes / 60 +
+    seconds / 3600;
+
+
+  if (
+    reference === "S" ||
+    reference === "W"
+  ) {
+
+    decimal *= -1;
+
+  }
+
+
+  return decimal;
+
+}
+
+
+/* =====================================================
+   EXIF — LECTURE
+===================================================== */
+
+function readPhotoMetadata(file) {
+
+  return new Promise(
+    resolve => {
+
+      EXIF.getData(
+        file,
+        function() {
+
+          const date =
+            EXIF.getTag(
+              this,
+              "DateTimeOriginal"
+            );
+
+
+          const gpsLatitude =
+            EXIF.getTag(
+              this,
+              "GPSLatitude"
+            );
+
+
+          const gpsLatitudeRef =
+            EXIF.getTag(
+              this,
+              "GPSLatitudeRef"
+            );
+
+
+          const gpsLongitude =
+            EXIF.getTag(
+              this,
+              "GPSLongitude"
+            );
+
+
+          const gpsLongitudeRef =
+            EXIF.getTag(
+              this,
+              "GPSLongitudeRef"
+            );
+
+
+          let latitude =
+            null;
+
+          let longitude =
+            null;
+
+
+          if (
+            gpsLatitude &&
+            gpsLongitude
+          ) {
+
+            latitude =
+              convertGPS(
+                gpsLatitude,
+                gpsLatitudeRef
+              );
+
+
+            longitude =
+              convertGPS(
+                gpsLongitude,
+                gpsLongitudeRef
+              );
+
+          }
+
+
+          resolve({
+
+            date,
+
+            latitude,
+
+            longitude
+
+          });
+
+        }
+      );
+
+    }
+  );
+
+}
 
 
 /* =====================================================
    PHOTO → EXIF
 ===================================================== */
 
-document.getElementById("photo").addEventListener(
-  "change",
-  async event => {
+document
+  .getElementById("photo")
+  .addEventListener(
+    "change",
+    async function() {
 
-    const file =
-      event.target.files[0];
-
-    if (!file) return;
-
-    const info =
-      document.getElementById("photoInfo");
-
-    info.style.display = "block";
-
-    info.textContent =
-      "LECTURE DES MÉTADONNÉES DE LA PHOTO...";
+      const file =
+        this.files[0];
 
 
-    try {
-
-      const exif =
-        await exifr.parse(
-          file,
-          {
-            gps: true,
-            DateTimeOriginal: true,
-            CreateDate: true
-          }
-        );
-
-
-      let messages = [];
-
-
-      /* DATE */
-
-      const exifDate =
-        exif?.DateTimeOriginal ||
-        exif?.CreateDate;
-
-
-      if (exifDate instanceof Date) {
-
-        const yyyy =
-          exifDate.getFullYear();
-
-        const mm =
-          String(
-            exifDate.getMonth() + 1
-          ).padStart(2, "0");
-
-        const dd =
-          String(
-            exifDate.getDate()
-          ).padStart(2, "0");
-
-
-        document.getElementById("date").value =
-          `${yyyy}-${mm}-${dd}`;
-
-        messages.push(
-          `DATE EXIF : ${dd}/${mm}/${yyyy}`
-        );
-
+      if (!file) {
+        return;
       }
 
 
-      /* GPS */
-
-      if (
-        typeof exif?.latitude === "number" &&
-        typeof exif?.longitude === "number"
-      ) {
-
-        setLocation(
-          exif.latitude,
-          exif.longitude,
-          "POSITION GPS RÉCUPÉRÉE DEPUIS LA PHOTO"
+      const info =
+        document.getElementById(
+          "photoInfo"
         );
 
 
-        map.setView(
-          [
+      info.style.display =
+        "block";
+
+
+      info.textContent =
+        "LECTURE DES MÉTADONNÉES DE LA PHOTO...";
+
+
+      try {
+
+        /*
+         * On utilise d'abord exifr,
+         * qui est plus fiable sur les
+         * fichiers récents d'iPhone.
+         */
+
+        const exif =
+          await exifr.parse(
+            file,
+            {
+              gps: true,
+              DateTimeOriginal: true,
+              CreateDate: true
+            }
+          );
+
+
+        let dateFound =
+          false;
+
+        let gpsFound =
+          false;
+
+
+        /* =========================
+           DATE
+        ========================= */
+
+        const exifDate =
+          exif?.DateTimeOriginal ||
+          exif?.CreateDate;
+
+
+        if (
+          exifDate instanceof Date
+        ) {
+
+          const yyyy =
+            exifDate.getFullYear();
+
+          const mm =
+            String(
+              exifDate.getMonth() + 1
+            ).padStart(2, "0");
+
+          const dd =
+            String(
+              exifDate.getDate()
+            ).padStart(2, "0");
+
+
+          document.getElementById(
+            "date"
+          ).value =
+            `${yyyy}-${mm}-${dd}`;
+
+
+          dateFound =
+            true;
+
+        }
+
+
+        /* =========================
+           GPS
+        ========================= */
+
+        if (
+          typeof exif?.latitude ===
+            "number" &&
+
+          typeof exif?.longitude ===
+            "number"
+        ) {
+
+          setLocation(
             exif.latitude,
-            exif.longitude
-          ],
-          17
+            exif.longitude,
+            "LOCALISATION EXTRAITE DE LA PHOTO"
+          );
+
+
+          map.setView(
+            [
+              exif.latitude,
+              exif.longitude
+            ],
+            17
+          );
+
+
+          gpsFound =
+            true;
+
+        }
+
+
+        /* =========================
+           FALLBACK EXIF-JS
+        ========================= */
+
+        if (
+          !dateFound ||
+          !gpsFound
+        ) {
+
+          const metadata =
+            await readPhotoMetadata(
+              file
+            );
+
+
+          if (
+            !dateFound &&
+            metadata.date
+          ) {
+
+            const parts =
+              metadata.date.split(" ");
+
+
+            if (
+              parts[0]
+            ) {
+
+              const dateParts =
+                parts[0].split(":");
+
+
+              if (
+                dateParts.length === 3
+              ) {
+
+                const formattedDate =
+                  `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
+
+
+                document.getElementById(
+                  "date"
+                ).value =
+                  formattedDate;
+
+
+                dateFound =
+                  true;
+
+              }
+
+            }
+
+          }
+
+
+          if (
+            !gpsFound &&
+
+            metadata.latitude !==
+              null &&
+
+            metadata.longitude !==
+              null
+          ) {
+
+            setLocation(
+              metadata.latitude,
+              metadata.longitude,
+              "LOCALISATION EXTRAITE DE LA PHOTO"
+            );
+
+
+            map.setView(
+              [
+                metadata.latitude,
+                metadata.longitude
+              ],
+              17
+            );
+
+
+            gpsFound =
+              true;
+
+          }
+
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        const messages =
+          [];
+
+
+        if (dateFound) {
+
+          messages.push(
+            "DATE EXIF RÉCUPÉRÉE"
+          );
+
+        } else {
+
+          messages.push(
+            "DATE EXIF ABSENTE — DATE MANUELLE CONSERVÉE"
+          );
+
+        }
+
+
+        if (gpsFound) {
+
+          messages.push(
+            "GPS EXIF RÉCUPÉRÉ"
+          );
+
+        } else {
+
+          messages.push(
+            "GPS EXIF ABSENT — LOCALISATION MANUELLE DISPONIBLE"
+          );
+
+        }
+
+
+        info.textContent =
+          messages.join(" • ");
+
+
+      } catch (error) {
+
+        console.error(
+          "EXIF:",
+          error
         );
 
 
-        messages.push(
-          "GPS EXIF : POSITION RÉCUPÉRÉE"
-        );
+        info.textContent =
+          "EXIF NON DISPONIBLES — DATE ET LOCALISATION MANUELLES DISPONIBLES";
 
       }
-
-
-      if (!messages.length) {
-
-        messages.push(
-          "AUCUNE DONNÉE EXIF — UTILISATION DES OPTIONS MANUELLES"
-        );
-
-      }
-
-
-      info.textContent =
-        messages.join(" • ");
-
-
-    } catch (error) {
-
-      console.error(
-        "EXIF:",
-        error
-      );
-
-      info.textContent =
-        "MÉTADONNÉES NON DISPONIBLES — DATE DU JOUR UTILISÉE";
 
     }
-
-  }
-);
+  );
 
 
 /* =====================================================
-   MARKERS
+   MARKER STYLES
 ===================================================== */
 
 const markerStyles = {
 
   sticker: {
-    radius: 7,
+    radius: 6,
     dashArray: null
   },
 
@@ -762,12 +1383,16 @@ const markerStyles = {
   },
 
   graff: {
-    radius: 10,
+    radius: 6,
     dashArray: null
   }
 
 };
 
+
+/* =====================================================
+   CREATE MARKER
+===================================================== */
 
 function createMarker(work) {
 
@@ -813,9 +1438,12 @@ function createMarker(work) {
 
       <strong>
         ${escapeHTML(
-          (work.category || "WORK").toUpperCase()
+          (
+            work.category ||
+            "WORK"
+          ).toUpperCase()
         )}
-        #${work.Id}
+        #${escapeHTML(work.Id)}
       </strong>
   `;
 
@@ -824,7 +1452,9 @@ function createMarker(work) {
 
     html += `
       <img
-        src="${escapeHTML(work.photo_url)}"
+        src="${escapeHTML(
+          work.photo_url
+        )}"
         alt=""
       >
     `;
@@ -836,7 +1466,9 @@ function createMarker(work) {
 
     html += `
       <div class="meta">
-        ${escapeHTML(work.date)}
+        ${escapeHTML(
+          work.date
+        )}
       </div>
     `;
 
@@ -848,21 +1480,23 @@ function createMarker(work) {
   `;
 
 
-  marker.bindPopup(html);
+  marker.bindPopup(
+    html
+  );
+
 
   return marker;
 
 }
 
 
+/* =====================================================
+   RENDER MARKERS
+===================================================== */
+
 function renderMarkers() {
 
-  markers.forEach(
-    marker =>
-      map.removeLayer(marker)
-  );
-
-  markers = [];
+  markerCluster.clearLayers();
 
 
   const filtered =
@@ -870,23 +1504,31 @@ function renderMarkers() {
       ? works
       : works.filter(
           work =>
-            work.category === currentFilter
+            work.category ===
+            currentFilter
         );
 
 
-  filtered.forEach(work => {
+  filtered.forEach(
+    work => {
 
-    const marker =
-      createMarker(work);
-
-    marker.addTo(map);
-
-    markers.push(marker);
-
-  });
+      const marker =
+        createMarker(
+          work
+        );
 
 
-  document.getElementById("counter").textContent =
+      markerCluster.addLayer(
+        marker
+      );
+
+    }
+  );
+
+
+  document.getElementById(
+    "counter"
+  ).textContent =
     filtered.length;
 
 }
@@ -904,10 +1546,14 @@ async function loadWorks() {
       await fetch(
         `${SUPABASE_URL}/rest/v1/works?select=*&status=eq.approved&order=created_at.desc`,
         {
+
           headers: {
+
             "apikey":
               SUPABASE_KEY
+
           }
+
         }
       );
 
@@ -917,7 +1563,10 @@ async function loadWorks() {
       const error =
         await response.text();
 
-      throw new Error(error);
+
+      throw new Error(
+        error
+      );
 
     }
 
@@ -950,31 +1599,41 @@ loadWorks();
 
 document
   .querySelectorAll(".filter")
-  .forEach(button => {
+  .forEach(
+    button => {
 
-    button.addEventListener(
-      "click",
-      () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        document
-          .querySelectorAll(".filter")
-          .forEach(
-            b =>
-              b.classList.remove("active")
+          document
+            .querySelectorAll(
+              ".filter"
+            )
+            .forEach(
+              b =>
+                b.classList.remove(
+                  "active"
+                )
+            );
+
+
+          button.classList.add(
+            "active"
           );
 
 
-        button.classList.add("active");
+          currentFilter =
+            button.dataset.filter;
 
-        currentFilter =
-          button.dataset.filter;
 
-        renderMarkers();
+          renderMarkers();
 
-      }
-    );
+        }
+      );
 
-  });
+    }
+  );
 
 
 /* =====================================================
@@ -982,25 +1641,33 @@ document
 ===================================================== */
 
 const modal =
-  document.getElementById("modal");
+  document.getElementById(
+    "modal"
+  );
 
 
 document.getElementById(
   "openModal"
-).onclick = () => {
+).onclick =
+  () => {
 
-  modal.classList.add("show");
+    modal.classList.add(
+      "show"
+    );
 
-};
+  };
 
 
 document.getElementById(
   "closeModal"
-).onclick = () => {
+).onclick =
+  () => {
 
-  modal.classList.remove("show");
+    modal.classList.remove(
+      "show"
+    );
 
-};
+  };
 
 
 /* =====================================================
@@ -1015,6 +1682,7 @@ function setLocation(
 
   selectedLatitude =
     Number(latitude);
+
 
   selectedLongitude =
     Number(longitude);
@@ -1103,14 +1771,26 @@ document.getElementById(
         await fetch(
           "https://nominatim.openstreetmap.org/search?" +
           new URLSearchParams({
-            q: address,
-            format: "json",
-            limit: "1"
+
+            q:
+              address,
+
+            format:
+              "json",
+
+            limit:
+              "1"
+
           }),
           {
+
             headers: {
-              "Accept-Language": "fr"
+
+              "Accept-Language":
+                "fr"
+
             }
+
           }
         );
 
@@ -1135,7 +1815,8 @@ document.getElementById(
       setLocation(
         Number(result.lat),
         Number(result.lon),
-        "ADRESSE : " + result.display_name
+        "ADRESSE : " +
+        result.display_name
       );
 
 
@@ -1172,7 +1853,9 @@ document.getElementById(
 ).onclick =
   () => {
 
-    if (!navigator.geolocation) {
+    if (
+      !navigator.geolocation
+    ) {
 
       alert(
         "Géolocalisation indisponible."
@@ -1184,6 +1867,7 @@ document.getElementById(
 
 
     navigator.geolocation.getCurrentPosition(
+
       position => {
 
         setLocation(
@@ -1202,6 +1886,8 @@ document.getElementById(
         );
 
       },
+
+
       () => {
 
         alert(
@@ -1209,10 +1895,18 @@ document.getElementById(
         );
 
       },
+
+
       {
-        enableHighAccuracy: true,
-        timeout: 10000
+
+        enableHighAccuracy:
+          true,
+
+        timeout:
+          10000
+
       }
+
     );
 
   };
@@ -1227,13 +1921,19 @@ document.getElementById(
 ).onclick =
   () => {
 
-    modal.classList.remove("show");
+    modal.classList.remove(
+      "show"
+    );
 
-    placementMode = true;
+
+    placementMode =
+      true;
+
 
     document.getElementById(
       "map-placement-message"
-    ).style.display = "block";
+    ).style.display =
+      "block";
 
   };
 
@@ -1242,7 +1942,9 @@ map.on(
   "click",
   event => {
 
-    if (!placementMode) return;
+    if (!placementMode) {
+      return;
+    }
 
 
     setLocation(
@@ -1252,15 +1954,19 @@ map.on(
     );
 
 
-    placementMode = false;
+    placementMode =
+      false;
 
 
     document.getElementById(
       "map-placement-message"
-    ).style.display = "none";
+    ).style.display =
+      "none";
 
 
-    modal.classList.add("show");
+    modal.classList.add(
+      "show"
+    );
 
   }
 );
@@ -1291,6 +1997,10 @@ document.getElementById(
 
     try {
 
+      /* =========================
+         CATÉGORIE
+      ========================= */
+
       const category =
         document.getElementById(
           "category"
@@ -1306,9 +2016,16 @@ document.getElementById(
       }
 
 
+      /* =========================
+         LOCALISATION
+      ========================= */
+
       if (
-        selectedLatitude === null ||
-        selectedLongitude === null
+        selectedLatitude ===
+          null ||
+
+        selectedLongitude ===
+          null
       ) {
 
         throw new Error(
@@ -1317,6 +2034,10 @@ document.getElementById(
 
       }
 
+
+      /* =========================
+         PHOTO
+      ========================= */
 
       const file =
         document.getElementById(
@@ -1338,11 +2059,10 @@ document.getElementById(
       ========================= */
 
       const safeName =
-        file.name
-          .replace(
-            /[^a-zA-Z0-9._-]/g,
-            "_"
-          );
+        file.name.replace(
+          /[^a-zA-Z0-9._-]/g,
+          "_"
+        );
 
 
       const filename =
@@ -1350,16 +2070,19 @@ document.getElementById(
 
 
       /* =========================
-         UPLOAD
+         UPLOAD PHOTO
       ========================= */
 
       const uploadResponse =
         await fetch(
           `${SUPABASE_URL}/storage/v1/object/works/${encodeURIComponent(filename)}`,
           {
-            method: "POST",
+
+            method:
+              "POST",
 
             headers: {
+
               "apikey":
                 SUPABASE_KEY,
 
@@ -1372,9 +2095,12 @@ document.getElementById(
 
               "x-upsert":
                 "false"
+
             },
 
-            body: file
+            body:
+              file
+
           }
         );
 
@@ -1383,6 +2109,7 @@ document.getElementById(
 
         const errorText =
           await uploadResponse.text();
+
 
         throw new Error(
           "UPLOAD PHOTO : " +
@@ -1430,7 +2157,8 @@ document.getElementById(
           `${SUPABASE_URL}/rest/v1/works`,
           {
 
-            method: "POST",
+            method:
+              "POST",
 
             headers: {
 
@@ -1449,7 +2177,9 @@ document.getElementById(
             },
 
             body:
-              JSON.stringify(payload)
+              JSON.stringify(
+                payload
+              )
 
           }
         );
@@ -1460,6 +2190,7 @@ document.getElementById(
         const errorText =
           await insertResponse.text();
 
+
         throw new Error(
           "BASE DE DONNÉES : " +
           errorText
@@ -1467,6 +2198,10 @@ document.getElementById(
 
       }
 
+
+      /* =========================
+         SUCCÈS
+      ========================= */
 
       status.textContent =
         "✓ ŒUVRE ENVOYÉE — EN ATTENTE DE VALIDATION";
@@ -1477,8 +2212,11 @@ document.getElementById(
       ).reset();
 
 
-      selectedLatitude = null;
-      selectedLongitude = null;
+      selectedLatitude =
+        null;
+
+      selectedLongitude =
+        null;
 
 
       document.getElementById(
@@ -1505,7 +2243,8 @@ document.getElementById(
           temporaryMarker
         );
 
-        temporaryMarker = null;
+        temporaryMarker =
+          null;
 
       }
 
@@ -1515,6 +2254,7 @@ document.getElementById(
       console.error(
         error
       );
+
 
       status.textContent =
         "ERREUR : " +
@@ -1533,11 +2273,31 @@ document.getElementById(
 function escapeHTML(value) {
 
   return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
