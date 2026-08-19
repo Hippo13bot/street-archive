@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>VALEN WORLD — ADMIN</title>
 
@@ -47,9 +53,11 @@ button {
 ========================= */
 
 #loginScreen {
+
   min-height: 100vh;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -57,6 +65,7 @@ button {
 }
 
 .login-box {
+
   width: 100%;
   max-width: 400px;
 
@@ -66,6 +75,7 @@ button {
 }
 
 .logo {
+
   display: inline-block;
 
   padding: 5px 7px 4px;
@@ -73,52 +83,60 @@ button {
   border: 2px solid #111;
 
   font-size: 22px;
+
   font-weight: 900;
 
   letter-spacing: -1.5px;
 }
 
 .admin-label {
+
   margin-top: 5px;
 
   font-size: 9px;
+
   font-weight: 900;
 
   letter-spacing: 1.5px;
 }
 
 .login-box h1 {
+
   margin: 20px 0;
 
   font-size: 28px;
-  line-height: 1;
 
   letter-spacing: -1.5px;
 }
 
 label {
+
   display: block;
 
   margin: 13px 0 5px;
 
   font-size: 9px;
+
   font-weight: 900;
 
   letter-spacing: 1px;
 }
 
 input {
+
   width: 100%;
 
   padding: 11px;
 
   border: 1px solid #111;
+
   border-radius: 0;
 
   background: transparent;
 }
 
 .login-button {
+
   width: 100%;
 
   margin-top: 15px;
@@ -128,50 +146,57 @@ input {
   border: 2px solid #111;
 
   background: #111;
+
   color: #f4f4f0;
 
   font-size: 10px;
+
   font-weight: 900;
 
   letter-spacing: 1px;
 }
 
 .error {
+
   margin-top: 10px;
 
   font-size: 10px;
+
   font-weight: 900;
 }
 
 
 /* =========================
-   ADMIN
+   ADMIN HEADER
 ========================= */
 
-#adminApp {
-  display: none;
-}
-
 header {
+
   padding: 16px;
 
   border-bottom: 2px solid #111;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   gap: 10px;
 }
 
 .logout {
+
   padding: 8px 10px;
 
   border: 1px solid #111;
 
+  border-radius: 0;
+
   background: transparent;
 
   font-size: 9px;
+
   font-weight: 900;
 }
 
@@ -181,18 +206,22 @@ header {
 ========================= */
 
 main {
+
   width: 100%;
-  max-width: 1200px;
+
+  max-width: 1100px;
 
   margin: auto;
 
-  padding: 18px 16px 40px;
+  padding: 18px 16px 50px;
 }
 
 .top {
+
   display: flex;
 
   align-items: end;
+
   justify-content: space-between;
 
   gap: 10px;
@@ -201,55 +230,27 @@ main {
 }
 
 h1 {
+
   margin: 0;
 
   font-size: 28px;
+
   line-height: 1;
 
   letter-spacing: -1.5px;
 }
 
 .counter {
+
   padding: 6px 8px;
 
   border: 1px dashed #111;
 
   font-size: 9px;
+
   font-weight: 900;
 
   letter-spacing: 1px;
-}
-
-
-/* =========================
-   MAP
-========================= */
-
-#adminMap {
-  width: 100%;
-  height: 430px;
-
-  margin-bottom: 20px;
-
-  border: 2px solid #111;
-
-  filter: grayscale(1) contrast(.9);
-}
-
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.leaflet-popup-content {
-  margin: 10px;
-
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.leaflet-control-zoom a {
-  border-radius: 0 !important;
 }
 
 
@@ -258,21 +259,24 @@ h1 {
 ========================= */
 
 #works {
+
   display: grid;
 
-  gap: 15px;
+  gap: 18px;
 }
 
 .work {
+
   border: 2px solid #111;
 
   background: #f4f4f0;
 }
 
 .photo {
+
   width: 100%;
 
-  max-height: 500px;
+  height: 300px;
 
   object-fit: cover;
 
@@ -282,10 +286,12 @@ h1 {
 }
 
 .info {
-  padding: 13px;
+
+  padding: 14px;
 }
 
 .category {
+
   display: inline-block;
 
   padding: 5px 7px;
@@ -293,43 +299,118 @@ h1 {
   border: 1px dashed #111;
 
   font-size: 9px;
+
   font-weight: 900;
 
   letter-spacing: 1px;
 }
 
-.id {
-  margin-top: 8px;
+.date {
+
+  margin-top: 9px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   LOCATION
+========================= */
+
+.location-box {
+
+  margin-top: 12px;
+
+  border: 1px solid #111;
+}
+
+.location-title {
+
+  padding: 7px;
+
+  border-bottom: 1px solid #111;
 
   font-size: 9px;
 
   font-weight: 900;
+
+  letter-spacing: 1px;
 }
 
-.date {
-  margin-top: 8px;
+.address {
+
+  padding: 9px;
 
   font-size: 10px;
-  font-weight: 700;
-}
 
-.location {
-  margin-top: 8px;
-
-  font-size: 9px;
-
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .coordinates {
-  margin-top: 3px;
+
+  padding: 0 9px 9px;
 
   font-size: 9px;
 
-  opacity: .6;
+  opacity: .7;
 }
 
+.admin-map {
+
+  width: 100%;
+
+  height: 230px;
+
+  border-top: 1px solid #111;
+}
+
+
+/* =========================
+   MAP BUTTONS
+========================= */
+
+.map-actions {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 6px;
+
+  padding: 8px;
+}
+
+.map-button {
+
+  padding: 10px;
+
+  border: 1px solid #111;
+
+  background: transparent;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: .7px;
+}
+
+.map-button.active {
+
+  background: #111;
+
+  color: #f4f4f0;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
 .actions {
+
   display: grid;
 
   grid-template-columns: 1fr 1fr;
@@ -341,35 +422,45 @@ h1 {
 
 .approve,
 .reject {
+
   padding: 12px;
 
   border-radius: 0;
 
   font-size: 10px;
+
   font-weight: 900;
 
   letter-spacing: .8px;
 }
 
 .approve {
+
   border: 2px solid #111;
 
   background: #111;
+
   color: #f4f4f0;
 }
 
 .reject {
+
   border: 1px solid #111;
 
   background: transparent;
+
   color: #111;
 }
 
 .status {
+
   margin-top: 10px;
 
   font-size: 10px;
+
   font-weight: 900;
+
+  line-height: 1.4;
 }
 
 
@@ -378,6 +469,7 @@ h1 {
 ========================= */
 
 .empty {
+
   padding: 30px 15px;
 
   border: 1px dashed #111;
@@ -385,40 +477,10 @@ h1 {
   text-align: center;
 
   font-size: 10px;
+
   font-weight: 900;
 
   letter-spacing: 1px;
-}
-
-
-/* =========================
-   POPUP
-========================= */
-
-.popup-image {
-  width: 180px;
-
-  max-height: 130px;
-
-  object-fit: cover;
-
-  margin-top: 8px;
-
-  filter: grayscale(1);
-}
-
-.popup-title {
-  font-weight: 900;
-
-  font-size: 12px;
-}
-
-.popup-meta {
-  margin-top: 5px;
-
-  font-size: 9px;
-
-  line-height: 1.5;
 }
 
 
@@ -429,12 +491,15 @@ h1 {
 @media (min-width: 700px) {
 
   #works {
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+      repeat(2, 1fr);
   }
 
 }
 
 </style>
+
 </head>
 
 
@@ -493,8 +558,8 @@ h1 {
       </button>
 
       <div
-        id="loginError"
         class="error"
+        id="loginError"
       ></div>
 
     </form>
@@ -506,66 +571,73 @@ h1 {
 
 
 <!-- =====================================================
-     ADMIN APP
+     ADMIN
 ===================================================== -->
 
-<div id="adminApp">
+<div
+  id="adminApp"
+  style="display:none;"
+>
 
-  <header>
 
-    <div>
+<header>
 
-      <div class="logo">
-        VALEN WORLD
-      </div>
+  <div>
 
-      <div class="admin-label">
-        ADMINISTRATION
-      </div>
+    <div class="logo">
+      VALEN WORLD
+    </div>
+
+    <div class="admin-label">
+      ADMINISTRATION
+    </div>
+
+  </div>
+
+
+  <button
+    class="logout"
+    id="logout"
+  >
+    DÉCONNEXION
+  </button>
+
+</header>
+
+
+
+<main>
+
+
+  <div class="top">
+
+    <h1>
+      À VALIDER
+    </h1>
+
+    <div class="counter">
+
+      <span id="counter">
+        0
+      </span>
+
+      EN ATTENTE
 
     </div>
 
-    <button
-      id="logout"
-      class="logout"
-    >
-      DÉCONNEXION
-    </button>
-
-  </header>
+  </div>
 
 
-  <main>
+  <div id="works">
 
-    <div class="top">
-
-      <h1>
-        À VALIDER
-      </h1>
-
-      <div class="counter">
-
-        <span id="counter">
-          0
-        </span>
-
-        EN ATTENTE
-
-      </div>
-
+    <div class="empty">
+      CHARGEMENT...
     </div>
 
-
-    <!-- CARTE ADMIN -->
-
-    <div id="adminMap"></div>
+  </div>
 
 
-    <!-- LISTE -->
-
-    <div id="works"></div>
-
-  </main>
+</main>
 
 </div>
 
@@ -587,37 +659,11 @@ const SUPABASE_URL =
 
 
 const SUPABASE_KEY =
-  "sb_publishable_AAzooie5TH6HNzupodCrvQ_nWrY0D_t";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsdmN1Z3doamF4bXB2c2twbHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwODQzNTMsImV4cCI6MjEwMjY2MDM1M30.pEvX_uzDvUMTaZbeCWE071718XGGm0YAj6FgZaB6gVE";
 
 
 /* =====================================================
-   VARIABLES
-===================================================== */
-
-let adminMap = null;
-
-let works = [];
-
-let adminMarkers = [];
-
-let currentUser = null;
-
-
-/*
-  IMPORTANT :
-
-  Dans ta base Supabase la colonne s'appelle :
-
-  "Id"
-
-  avec un I MAJUSCULE.
-
-  PostgreSQL distingue "Id" de "id".
-*/
-
-
-/* =====================================================
-   TOKEN
+   SESSION
 ===================================================== */
 
 function getToken() {
@@ -630,86 +676,34 @@ function getToken() {
 
 
 /* =====================================================
-   SUPABASE FETCH
-===================================================== */
-
-async function supabaseFetch(
-  endpoint,
-  options = {}
-) {
-
-  const token =
-    getToken();
-
-
-  const headers = {
-
-    "apikey":
-      SUPABASE_KEY,
-
-    ...options.headers
-
-  };
-
-
-  if (token) {
-
-    headers[
-      "Authorization"
-    ] =
-      `Bearer ${token}`;
-
-  }
-
-
-  return fetch(
-    `${SUPABASE_URL}${endpoint}`,
-    {
-      ...options,
-      headers
-    }
-  );
-
-}
-
-
-/* =====================================================
    LOGIN
 ===================================================== */
 
 document
-  .getElementById(
-    "loginForm"
-  )
+  .getElementById("loginForm")
   .addEventListener(
     "submit",
-    async event => {
+    async function(event) {
 
       event.preventDefault();
 
 
       const email =
         document
-          .getElementById(
-            "email"
-          )
+          .getElementById("email")
           .value
           .trim();
 
 
       const password =
         document
-          .getElementById(
-            "password"
-          )
+          .getElementById("password")
           .value;
 
 
       const error =
         document
-          .getElementById(
-            "loginError"
-          );
+          .getElementById("loginError");
 
 
       error.textContent =
@@ -725,8 +719,7 @@ document
 
             {
 
-              method:
-                "POST",
+              method: "POST",
 
               headers: {
 
@@ -758,9 +751,7 @@ document
           await response.json();
 
 
-        if (
-          !response.ok
-        ) {
+        if (!response.ok) {
 
           throw new Error(
 
@@ -774,39 +765,51 @@ document
 
 
         localStorage.setItem(
+
           "valen_access_token",
+
           data.access_token
+
         );
 
 
         localStorage.setItem(
+
           "valen_refresh_token",
+
           data.refresh_token
+
         );
-
-
-        currentUser =
-          data.user;
 
 
         showAdmin();
 
 
-      } catch (
-        err
-      ) {
+      }
 
-        console.error(
-          err
+      catch(error) {
+
+        console.error(error);
+
+        errorElement(
+          error.message
         );
-
-        error.textContent =
-          err.message;
 
       }
 
     }
+
   );
+
+
+function errorElement(message) {
+
+  document
+    .getElementById("loginError")
+    .textContent =
+    message;
+
+}
 
 
 /* =====================================================
@@ -816,114 +819,18 @@ document
 function showAdmin() {
 
   document
-    .getElementById(
-      "loginScreen"
-    )
+    .getElementById("loginScreen")
     .style.display =
     "none";
 
 
   document
-    .getElementById(
-      "adminApp"
-    )
+    .getElementById("adminApp")
     .style.display =
     "block";
 
 
-  /*
-    La carte est créée seulement
-    maintenant que le conteneur existe.
-  */
-
-  setTimeout(
-    () => {
-
-      initializeAdminMap();
-
-      loadPendingWorks();
-
-    },
-    50
-  );
-
-}
-
-
-/* =====================================================
-   MAP INITIALIZATION
-===================================================== */
-
-function initializeAdminMap() {
-
-  if (
-    adminMap
-  ) {
-
-    adminMap.invalidateSize();
-
-    return;
-
-  }
-
-
-  const mapElement =
-    document.getElementById(
-      "adminMap"
-    );
-
-
-  if (
-    !mapElement
-  ) {
-
-    console.error(
-      "Conteneur de carte introuvable."
-    );
-
-    return;
-
-  }
-
-
-  adminMap =
-    L.map(
-      "adminMap",
-      {
-        zoomControl:
-          true
-      }
-    )
-    .setView(
-      [48.8566, 2.3522],
-      5
-    );
-
-
-  L.tileLayer(
-
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-
-    {
-
-      attribution:
-        "© OpenStreetMap contributors"
-
-    }
-
-  ).addTo(
-    adminMap
-  );
-
-
-  setTimeout(
-    () => {
-
-      adminMap.invalidateSize();
-
-    },
-    200
-  );
+  loadPendingWorks();
 
 }
 
@@ -940,38 +847,109 @@ async function loadPendingWorks() {
     );
 
 
-  container.innerHTML =
-    `
-      <div class="empty">
-        CHARGEMENT...
-      </div>
-    `;
+  container.innerHTML = `
+
+    <div class="empty">
+      CHARGEMENT...
+    </div>
+
+  `;
 
 
   try {
 
+    const token =
+      getToken();
+
+
+    if (!token) {
+
+      throw new Error(
+        "SESSION ABSENTE."
+      );
+
+    }
+
+
     /*
       IMPORTANT :
 
-      "Id" est écrit entre guillemets
-      car la colonne possède un I majuscule.
+      La colonne est bien :
+
+      id
+
+      et PAS :
+
+      Id
+
+      On utilise également
+      status=eq.pending.
     */
 
-    const response =
-      await supabaseFetch(
+    const url =
 
-        `/rest/v1/works?select=*&status=eq.pending&order="Id".desc`
+      `${SUPABASE_URL}/rest/v1/works` +
+
+      `?select=*` +
+
+      `&status=eq.pending` +
+
+      `&order=id.desc`;
+
+
+    const response =
+      await fetch(
+
+        url,
+
+        {
+
+          method:
+            "GET",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              `Bearer ${token}`,
+
+            "Accept":
+              "application/json"
+
+          }
+
+        }
 
       );
 
 
-    const data =
-      await response.json();
+    const text =
+      await response.text();
 
 
-    if (
-      !response.ok
-    ) {
+    let data;
+
+
+    try {
+
+      data =
+        JSON.parse(text);
+
+    }
+
+    catch {
+
+      throw new Error(
+        text ||
+        "Réponse Supabase invalide."
+      );
+
+    }
+
+
+    if (!response.ok) {
 
       throw new Error(
         JSON.stringify(data)
@@ -980,430 +958,89 @@ async function loadPendingWorks() {
     }
 
 
-    works =
-      Array.isArray(data)
-        ? data
-        : [];
+    if (!Array.isArray(data)) {
 
-
-    document.getElementById(
-      "counter"
-    ).textContent =
-      works.length;
-
-
-    renderAdminMarkers();
-
-
-    renderWorks();
-
-
-  } catch (
-    error
-  ) {
-
-    console.error(
-      error
-    );
-
-
-    container.innerHTML =
-      `
-        <div class="empty">
-
-          ERREUR DE CHARGEMENT
-
-          <br><br>
-
-          ${escapeHTML(
-            error.message
-          )}
-
-        </div>
-      `;
-
-  }
-
-}
-
-
-/* =====================================================
-   RENDER MAP MARKERS
-===================================================== */
-
-function renderAdminMarkers() {
-
-  if (
-    !adminMap
-  ) {
-
-    return;
-
-  }
-
-
-  adminMarkers.forEach(
-    marker => {
-
-      adminMap.removeLayer(
-        marker
+      throw new Error(
+        "Supabase n'a pas renvoyé une liste d'œuvres."
       );
 
     }
-  );
 
 
-  adminMarkers = [];
+    document
+      .getElementById("counter")
+      .textContent =
+      data.length;
 
 
-  const validWorks =
-    works.filter(
-      work => {
+    if (data.length === 0) {
 
-        return (
-          Number.isFinite(
-            Number(
-              work.latitude
-            )
-          ) &&
-          Number.isFinite(
-            Number(
-              work.longitude
-            )
-          )
+      container.innerHTML = `
 
-        );
-
-      }
-    );
-
-
-  validWorks.forEach(
-    work => {
-
-      const latitude =
-        Number(
-          work.latitude
-        );
-
-
-      const longitude =
-        Number(
-          work.longitude
-        );
-
-
-      const marker =
-        L.circleMarker(
-
-          [
-            latitude,
-            longitude
-          ],
-
-          {
-
-            radius:
-              8,
-
-            color:
-              "#111",
-
-            weight:
-              2,
-
-            dashArray:
-              "3,3",
-
-            fillColor:
-              "#f4f4f0",
-
-            fillOpacity:
-              1
-
-          }
-
-        );
-
-
-      let popup = `
-
-        <div>
-
-          <div class="popup-title">
-
-            ${escapeHTML(
-              (
-                work.category ||
-                "WORK"
-              ).toUpperCase()
-            )}
-
-          </div>
-
-          <div class="popup-meta">
-
-            ID :
-            ${escapeHTML(
-              getWorkId(work)
-            )}
-
-          </div>
-
-      `;
-
-
-      if (
-        work.address
-      ) {
-
-        popup += `
-
-          <div class="popup-meta">
-
-            ${escapeHTML(
-              work.address
-            )}
-
-          </div>
-
-        `;
-
-      }
-
-
-      popup += `
-
-          <div class="popup-meta">
-
-            ${latitude.toFixed(6)}
-            ,
-            ${longitude.toFixed(6)}
-
-          </div>
-
-        </div>
-
-      `;
-
-
-      if (
-        work.photo_url
-      ) {
-
-        popup = `
-
-          <div>
-
-            <div class="popup-title">
-
-              ${escapeHTML(
-                (
-                  work.category ||
-                  "WORK"
-                ).toUpperCase()
-              )}
-
-            </div>
-
-            <img
-              class="popup-image"
-              src="${escapeHTML(
-                work.photo_url
-              )}"
-              alt=""
-            >
-
-            <div class="popup-meta">
-
-              ID :
-              ${escapeHTML(
-                getWorkId(work)
-              )}
-
-            </div>
-
-            ${
-              work.address
-                ? `
-                  <div class="popup-meta">
-                    ${escapeHTML(
-                      work.address
-                    )}
-                  </div>
-                `
-                : ""
-            }
-
-          </div>
-
-        `;
-
-      }
-
-
-      marker.bindPopup(
-        popup
-      );
-
-
-      marker.addTo(
-        adminMap
-      );
-
-
-      adminMarkers.push(
-        marker
-      );
-
-    }
-  );
-
-
-  /*
-    Si des œuvres existent,
-    on centre la carte dessus.
-  */
-
-  if (
-    validWorks.length > 0
-  ) {
-
-    const bounds =
-      L.latLngBounds(
-        validWorks.map(
-          work => [
-
-            Number(
-              work.latitude
-            ),
-
-            Number(
-              work.longitude
-            )
-
-          ]
-        )
-      );
-
-
-    adminMap.fitBounds(
-      bounds,
-      {
-        padding:
-          [40, 40],
-        maxZoom:
-          15
-      }
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   GET REAL WORK ID
-===================================================== */
-
-function getWorkId(
-  work
-) {
-
-  /*
-    Priorité absolue à "Id".
-  */
-
-  if (
-    work.Id !== undefined &&
-    work.Id !== null
-  ) {
-
-    return String(
-      work.Id
-    );
-
-  }
-
-
-  /*
-    Sécurité au cas où Supabase
-    renverrait exceptionnellement id.
-  */
-
-  if (
-    work.id !== undefined &&
-    work.id !== null
-  ) {
-
-    return String(
-      work.id
-    );
-
-  }
-
-
-  return "";
-
-}
-
-
-/* =====================================================
-   RENDER WORK CARDS
-===================================================== */
-
-function renderWorks() {
-
-  const container =
-    document.getElementById(
-      "works"
-    );
-
-
-  if (
-    works.length === 0
-  ) {
-
-    container.innerHTML =
-      `
         <div class="empty">
 
           AUCUNE ŒUVRE EN ATTENTE
 
         </div>
+
       `;
 
-    return;
+      return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    data.forEach(
+      function(work) {
+
+        container.appendChild(
+
+          createWorkCard(
+            work
+          )
+
+        );
+
+      }
+
+    );
 
   }
 
+  catch(error) {
 
-  container.innerHTML =
-    "";
+    console.error(error);
 
 
-  works.forEach(
-    work => {
+    container.innerHTML = `
 
-      container.appendChild(
-        createWorkCard(
-          work
-        )
-      );
+      <div class="empty">
 
-    }
-  );
+        ERREUR DE CHARGEMENT
+
+        <br><br>
+
+        ${escapeHTML(
+          error.message
+        )}
+
+      </div>
+
+    `;
+
+  }
 
 }
 
 
 /* =====================================================
-   CREATE CARD
+   WORK CARD
 ===================================================== */
 
-function createWorkCard(
-  work
-) {
+function createWorkCard(work) {
 
   const article =
     document.createElement(
@@ -1415,33 +1052,19 @@ function createWorkCard(
     "work";
 
 
+  /*
+    TRÈS IMPORTANT :
+
+    On récupère l'ID directement
+    depuis work.id.
+
+    Aucun "Id".
+    Aucun "id" global.
+    Aucun undefined.
+  */
+
   const workId =
-    getWorkId(
-      work
-    );
-
-
-  let photoHTML =
-    "";
-
-
-  if (
-    work.photo_url
-  ) {
-
-    photoHTML = `
-
-      <img
-        class="photo"
-        src="${escapeHTML(
-          work.photo_url
-        )}"
-        alt="Œuvre"
-      >
-
-    `;
-
-  }
+    work.id;
 
 
   const latitude =
@@ -1456,47 +1079,54 @@ function createWorkCard(
     );
 
 
-  let coordinates =
-    "NON RENSEIGNÉES";
+  const validCoordinates =
 
-
-  if (
     Number.isFinite(latitude) &&
-    Number.isFinite(longitude)
-  ) {
-
-    coordinates =
-
-      latitude.toFixed(6) +
-      " , " +
-      longitude.toFixed(6);
-
-  }
+    Number.isFinite(longitude);
 
 
   article.innerHTML = `
 
-    ${photoHTML}
+    ${
+      work.photo_url
+
+      ?
+
+      `
+
+        <img
+
+          class="photo"
+
+          src="${escapeHTML(
+            work.photo_url
+          )}"
+
+          alt="Œuvre"
+
+        >
+
+      `
+
+      :
+
+      ""
+
+    }
+
 
     <div class="info">
+
 
       <div class="category">
 
         ${escapeHTML(
-          (
+
+          String(
             work.category ||
             "WORK"
           ).toUpperCase()
-        )}
 
-      </div>
-
-
-      <div class="id">
-
-        ID :
-        ${escapeHTML(
-          workId || "—"
         )}
 
       </div>
@@ -1505,6 +1135,7 @@ function createWorkCard(
       <div class="date">
 
         DATE :
+
         ${escapeHTML(
           work.date ||
           "—"
@@ -1513,111 +1144,839 @@ function createWorkCard(
       </div>
 
 
-      <div class="location">
-
-        ${
-          work.address
-            ? `
-              ADRESSE :
-              ${escapeHTML(
-                work.address
-              )}
-            `
-            : `
-              ADRESSE :
-              NON RENSEIGNÉE
-            `
-        }
-
-      </div>
+      <div class="location-box">
 
 
-      <div class="coordinates">
+        <div class="location-title">
 
-        COORDONNÉES :
-        ${escapeHTML(
-          coordinates
-        )}
+          LOCALISATION
+
+        </div>
+
+
+        <div
+          class="address"
+          id="address-${workId}"
+        >
+
+          RECHERCHE DE L'ADRESSE...
+
+        </div>
+
+
+        <div
+          class="coordinates"
+          id="coordinates-${workId}"
+        >
+
+          ${
+            validCoordinates
+
+              ?
+
+              `${latitude.toFixed(6)},
+               ${longitude.toFixed(6)}`
+
+              :
+
+              "COORDONNÉES ABSENTES"
+
+          }
+
+        </div>
+
+
+        <div
+          class="admin-map"
+          id="map-${workId}"
+        ></div>
+
+
+        <div class="map-actions">
+
+          <button
+            type="button"
+            class="map-button"
+            data-action="address"
+          >
+            ADRESSE
+          </button>
+
+
+          <button
+            type="button"
+            class="map-button"
+            data-action="gps"
+          >
+            MA POSITION
+          </button>
+
+        </div>
+
 
       </div>
 
 
       <div class="actions">
 
+
         <button
+          type="button"
           class="approve"
-          type="button"
         >
+
           ✓ APPROUVER
+
         </button>
 
 
         <button
-          class="reject"
           type="button"
+          class="reject"
         >
+
           ✕ REFUSER
+
         </button>
+
 
       </div>
 
 
       <div
         class="status"
+        id="status-${workId}"
       ></div>
+
 
     </div>
 
   `;
 
 
-  const approveButton =
-    article.querySelector(
-      ".approve"
+  /*
+    MAP
+  */
+
+  if (validCoordinates) {
+
+    setTimeout(
+      function() {
+
+        createAdminMap(
+
+          workId,
+
+          latitude,
+
+          longitude
+
+        );
+
+      },
+
+      50
+
+    );
+
+    reverseGeocode(
+
+      workId,
+
+      latitude,
+
+      longitude
+
+    );
+
+  }
+
+  else {
+
+    document
+      .getElementById(
+        `address-${workId}`
+      )
+      .textContent =
+      "LOCALISATION NON RENSEIGNÉE";
+
+  }
+
+
+  /*
+    APPROVE
+  */
+
+  article
+    .querySelector(".approve")
+    .addEventListener(
+      "click",
+      function() {
+
+        moderateWork(
+
+          workId,
+
+          "approved"
+
+        );
+
+      }
+
     );
 
 
-  const rejectButton =
-    article.querySelector(
-      ".reject"
+  /*
+    REJECT
+  */
+
+  article
+    .querySelector(".reject")
+    .addEventListener(
+      "click",
+      function() {
+
+        moderateWork(
+
+          workId,
+
+          "rejected"
+
+        );
+
+      }
+
     );
 
 
-  const statusElement =
-    article.querySelector(
-      ".status"
+  /*
+    GPS
+  */
+
+  article
+    .querySelector(
+      '[data-action="gps"]'
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        moveWorkToGPS(
+          workId
+        );
+
+      }
+
     );
 
 
-  approveButton.addEventListener(
-    "click",
-    () => {
+  /*
+    ADDRESS
+  */
 
-      moderateWork(
-        workId,
-        "approved",
-        statusElement
-      );
+  article
+    .querySelector(
+      '[data-action="address"]'
+    )
+    .addEventListener(
+      "click",
+      function() {
 
-    }
-  );
+        moveWorkToAddress(
+          workId
+        );
 
+      }
 
-  rejectButton.addEventListener(
-    "click",
-    () => {
-
-      moderateWork(
-        workId,
-        "rejected",
-        statusElement
-      );
-
-    }
-  );
+    );
 
 
   return article;
+
+}
+
+
+/* =====================================================
+   ADMIN MAPS
+===================================================== */
+
+const adminMaps = {};
+
+
+const adminMarkers = {};
+
+
+function createAdminMap(
+
+  workId,
+
+  latitude,
+
+  longitude
+
+) {
+
+  const element =
+    document.getElementById(
+      `map-${workId}`
+    );
+
+
+  if (!element) {
+
+    return;
+
+  }
+
+
+  if (adminMaps[workId]) {
+
+    return;
+
+  }
+
+
+  const map =
+    L.map(
+      element,
+      {
+
+        zoomControl:
+          true
+
+      }
+
+    ).setView(
+
+      [
+        latitude,
+        longitude
+      ],
+
+      16
+
+    );
+
+
+  L.tileLayer(
+
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+    {
+
+      attribution:
+        "© OpenStreetMap contributors"
+
+    }
+
+  ).addTo(map);
+
+
+  const marker =
+    L.marker(
+
+      [
+        latitude,
+        longitude
+
+      ]
+
+    ).addTo(map);
+
+
+  adminMaps[workId] =
+    map;
+
+
+  adminMarkers[workId] =
+    marker;
+
+
+  /*
+    Cliquer sur la carte
+    déplace l'œuvre.
+  */
+
+  map.on(
+    "click",
+    function(event) {
+
+      updateWorkLocation(
+
+        workId,
+
+        event.latlng.lat,
+
+        event.latlng.lng
+
+      );
+
+    }
+
+  );
+
+
+  setTimeout(
+    function() {
+
+      map.invalidateSize();
+
+    },
+
+    100
+
+  );
+
+}
+
+
+/* =====================================================
+   UPDATE LOCATION
+===================================================== */
+
+async function updateWorkLocation(
+
+  workId,
+
+  latitude,
+
+  longitude
+
+) {
+
+  const status =
+    document.getElementById(
+      `status-${workId}`
+    );
+
+
+  status.textContent =
+    "ENREGISTREMENT DE LA POSITION...";
+
+
+  try {
+
+    const token =
+      getToken();
+
+
+    if (!workId) {
+
+      throw new Error(
+        "ID DE L'ŒUVRE ABSENT."
+      );
+
+    }
+
+
+    const response =
+      await fetch(
+
+        `${SUPABASE_URL}/rest/v1/works?id=eq.${encodeURIComponent(
+          workId
+        )}`,
+
+        {
+
+          method:
+            "PATCH",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              `Bearer ${token}`,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              latitude:
+                latitude,
+
+              longitude:
+                longitude
+
+            })
+
+        }
+
+      );
+
+
+    if (!response.ok) {
+
+      const error =
+        await response.text();
+
+      throw new Error(
+        error
+      );
+
+    }
+
+
+    /*
+      Mise à jour de la carte.
+    */
+
+    if (
+      adminMarkers[workId]
+    ) {
+
+      adminMarkers[workId]
+        .setLatLng(
+
+          [
+            latitude,
+            longitude
+
+          ]
+
+        );
+
+    }
+
+
+    document
+      .getElementById(
+        `coordinates-${workId}`
+      )
+      .textContent =
+
+      `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+
+
+    reverseGeocode(
+
+      workId,
+
+      latitude,
+
+      longitude
+
+    );
+
+
+    status.textContent =
+      "✓ POSITION MODIFIÉE";
+
+  }
+
+  catch(error) {
+
+    console.error(error);
+
+    status.textContent =
+      "ERREUR : " +
+      error.message;
+
+  }
+
+}
+
+
+/* =====================================================
+   GPS ADMIN
+===================================================== */
+
+function moveWorkToGPS(
+  workId
+) {
+
+  if (
+    !navigator.geolocation
+  ) {
+
+    alert(
+      "La géolocalisation n'est pas disponible."
+    );
+
+    return;
+
+  }
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position) {
+
+      updateWorkLocation(
+
+        workId,
+
+        position.coords.latitude,
+
+        position.coords.longitude
+
+      );
+
+
+      if (
+        adminMaps[workId]
+      ) {
+
+        adminMaps[workId].setView(
+
+          [
+            position.coords.latitude,
+            position.coords.longitude
+
+          ],
+
+          17
+
+        );
+
+      }
+
+    },
+
+    function() {
+
+      alert(
+        "Impossible d'obtenir votre position."
+      );
+
+    }
+
+  );
+
+}
+
+
+/* =====================================================
+   ADDRESS ADMIN
+===================================================== */
+
+async function moveWorkToAddress(
+  workId
+) {
+
+  const address =
+    prompt(
+      "Entre la nouvelle adresse :"
+    );
+
+
+  if (!address) {
+
+    return;
+
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+
+        "https://nominatim.openstreetmap.org/search?" +
+
+        new URLSearchParams({
+
+          q:
+            address,
+
+          format:
+            "json",
+
+          limit:
+            "1",
+
+          addressdetails:
+            "1"
+
+        }),
+
+        {
+
+          headers: {
+
+            "Accept-Language":
+              "fr"
+
+          }
+
+        }
+
+      );
+
+
+    const results =
+      await response.json();
+
+
+    if (
+      !results.length
+    ) {
+
+      throw new Error(
+        "Adresse introuvable."
+      );
+
+    }
+
+
+    const result =
+      results[0];
+
+
+    const latitude =
+      Number(
+        result.lat
+      );
+
+
+    const longitude =
+      Number(
+        result.lon
+      );
+
+
+    await updateWorkLocation(
+
+      workId,
+
+      latitude,
+
+      longitude
+
+    );
+
+
+    if (
+      adminMaps[workId]
+    ) {
+
+      adminMaps[workId].setView(
+
+        [
+          latitude,
+          longitude
+
+        ],
+
+        17
+
+      );
+
+    }
+
+  }
+
+  catch(error) {
+
+    alert(
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   REVERSE GEOCODING
+===================================================== */
+
+async function reverseGeocode(
+
+  workId,
+
+  latitude,
+
+  longitude
+
+) {
+
+  const addressElement =
+    document.getElementById(
+      `address-${workId}`
+    );
+
+
+  if (!addressElement) {
+
+    return;
+
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+
+        "https://nominatim.openstreetmap.org/reverse?" +
+
+        new URLSearchParams({
+
+          lat:
+            latitude,
+
+          lon:
+            longitude,
+
+          format:
+            "json",
+
+          addressdetails:
+            "1"
+
+        }),
+
+        {
+
+          headers: {
+
+            "Accept-Language":
+              "fr"
+
+          }
+
+        }
+
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (
+      result.display_name
+    ) {
+
+      addressElement.textContent =
+        result.display_name;
+
+    }
+
+    else {
+
+      addressElement.textContent =
+        "ADRESSE INCONNUE";
+
+    }
+
+  }
+
+  catch(error) {
+
+    addressElement.textContent =
+      "ADRESSE NON DISPONIBLE";
+
+  }
 
 }
 
@@ -1627,21 +1986,17 @@ function createWorkCard(
 ===================================================== */
 
 async function moderateWork(
+
   workId,
-  newStatus,
-  statusElement
+
+  newStatus
+
 ) {
 
-  if (
-    !workId
-  ) {
-
-    statusElement.textContent =
-      "ERREUR : ID MANQUANT.";
-
-    return;
-
-  }
+  const statusElement =
+    document.getElementById(
+      `status-${workId}`
+    );
 
 
   statusElement.textContent =
@@ -1650,28 +2005,60 @@ async function moderateWork(
 
   try {
 
+    /*
+      Sécurité importante :
+      on vérifie que l'ID existe.
+    */
+
+    if (
+      workId === undefined ||
+      workId === null ||
+      workId === ""
+    ) {
+
+      throw new Error(
+        "ID DE L'ŒUVRE ABSENT."
+      );
+
+    }
+
+
     const token =
       getToken();
 
 
-    if (
-      !token
-    ) {
+    if (!token) {
 
       throw new Error(
-        "Session expirée."
+        "SESSION EXPIRÉE."
       );
 
     }
 
 
     /*
-      On récupère le compte connecté.
+      Récupération de l'utilisateur.
     */
 
     const userResponse =
-      await supabaseFetch(
-        "/auth/v1/user"
+      await fetch(
+
+        `${SUPABASE_URL}/auth/v1/user`,
+
+        {
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              `Bearer ${token}`
+
+          }
+
+        }
+
       );
 
 
@@ -1679,37 +2066,33 @@ async function moderateWork(
       await userResponse.json();
 
 
-    if (
-      !user.id
-    ) {
+    if (!user.id) {
 
       throw new Error(
-        "Utilisateur non connecté."
+        "UTILISATEUR NON CONNECTÉ."
       );
 
     }
 
 
     /*
-      IMPORTANT :
-
-      Le filtre utilise "Id"
-      et non id.
-
-      C'est la correction principale
-      de ton erreur 42703.
+      PATCH AVEC id EN MINUSCULE.
     */
 
     const endpoint =
 
-      `/rest/v1/works?Id=eq.${encodeURIComponent(
-        workId
+      `${SUPABASE_URL}/rest/v1/works` +
+
+      `?id=eq.${encodeURIComponent(
+        String(workId)
       )}`;
 
 
     const response =
-      await supabaseFetch(
+      await fetch(
+
         endpoint,
+
         {
 
           method:
@@ -1717,11 +2100,17 @@ async function moderateWork(
 
           headers: {
 
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              `Bearer ${token}`,
+
             "Content-Type":
               "application/json",
 
             "Prefer":
-              "return=representation"
+              "return=minimal"
 
           },
 
@@ -1740,43 +2129,63 @@ async function moderateWork(
             })
 
         }
+
       );
 
 
-    const responseText =
+    const text =
       await response.text();
 
 
-    if (
-      !response.ok
-    ) {
+    if (!response.ok) {
 
       throw new Error(
-        responseText ||
-        "Modification impossible."
+        text ||
+        "Impossible de modifier l'œuvre."
       );
 
     }
 
 
+    statusElement.textContent =
+
+      newStatus === "approved"
+
+        ?
+
+        "✓ ŒUVRE APPROUVÉE"
+
+        :
+
+        "✓ ŒUVRE REFUSÉE";
+
+
     /*
-      L'œuvre a bien été modifiée.
-      On recharge complètement la liste.
+      On recharge après un court délai
+      pour laisser voir le message.
     */
 
-    await loadPendingWorks();
+    setTimeout(
 
+      function() {
 
-  } catch (
-    error
-  ) {
+        loadPendingWorks();
 
-    console.error(
-      error
+      },
+
+      500
+
     );
+
+  }
+
+  catch(error) {
+
+    console.error(error);
 
 
     statusElement.textContent =
+
       "ERREUR : " +
       error.message;
 
@@ -1790,26 +2199,25 @@ async function moderateWork(
 ===================================================== */
 
 document
-  .getElementById(
-    "logout"
-  )
+  .getElementById("logout")
   .addEventListener(
+
     "click",
-    () => {
+
+    function() {
 
       localStorage.removeItem(
         "valen_access_token"
       );
 
-
       localStorage.removeItem(
         "valen_refresh_token"
       );
 
-
       location.reload();
 
     }
+
   );
 
 
@@ -1817,13 +2225,9 @@ document
    ESCAPE HTML
 ===================================================== */
 
-function escapeHTML(
-  value
-) {
+function escapeHTML(value) {
 
-  return String(
-    value ?? ""
-  )
+  return String(value)
 
     .replace(
       /&/g,
@@ -1868,4 +2272,5 @@ if (
 </script>
 
 </body>
+
 </html>
